@@ -1,0 +1,54 @@
+{
+    "name": "SwipeActions",
+    "maps": [
+        {
+            "name": "default",
+            "id": "c5387631-726e-4402-ba2c-e47f9145f783",
+            "actions": [
+                {
+                    "name": "StartSwipe",
+                    "type": "Button",
+                    "id": "0c2d36be-be5b-4de0-a352-e57cb3d04d64",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EndSwipe",
+                    "type": "Button",
+                    "id": "cd6be849-9ac2-4ba1-a780-52c3186974c5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d12db527-3ef9-47a6-81ae-8d271d4165de",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartSwipe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1937052e-02ec-48e3-b014-2c38a679ba58",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EndSwipe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: fcf7219bab7fe46a1ad266029b2fee19
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - icon: {fileID: 2800000, guid: a186f8a87ca4f4d3aa864638ad5dfb65, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 137490
+  packageName: Snaps Prototype | Office
+  packageVersion: 1.3
+  assetPath: Assets/TutorialInfo/Scripts/Readme.cs
+  uploadId: 381965

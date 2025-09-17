@@ -1,0 +1,216 @@
+```{r}
+# artc_searchtime_numeric.R
+library(dplyr)
+library(emmeans)
+library(ARTool)
+library(rstatix)
+library(effectsize)
+
+options(width=200)
+
+# Load data
+data <- df_clean_search
+
+# Convert columns
+data$ParticipantID <- as.factor(data$ParticipantID)
+data$Interface <- as.factor(data$Interface)
+data$TaskBlock <- as.ordered(data$TaskBlock)
+data$Trial <- as.ordered(data$Trial)
+# Trial remains numeric (trend modeling)
+
+# Run ART model
+m.art <- art(SearchTime ~ Interface * Trial * TaskBlock + Error(ParticipantID), data = data)
+
+# ANOVA
+anova_results <- anova(m.art)
+print(anova_results)
+
+# Effect sizes
+eta_squared_results <- eta_squared(anova_results, generalized = TRUE)
+print(format(eta_squared_results, digits=4))
+
+# Contrasts (Interface × TaskBlock, keeping Trial as numeric covariate)
+art.con(m.art, ~ Interface, adjust = "bonferroni")
+```
+
+```{r}
+
+# artc_searchtime_avg.R
+library(dplyr)
+library(emmeans)
+library(ARTool)
+library(rstatix)
+library(effectsize)
+
+# Load data
+data <- df_clean_search
+
+# Convert columns
+data$ParticipantID <- as.factor(data$ParticipantID)
+data$Interface <- as.factor(data$Interface)
+data$TaskBlock <- as.ordered(data$TaskBlock)
+
+# Average per Participant × Interface × TaskBlock
+# (Trial dropped since we're collapsing across it)
+data_avg <- data %>%
+  group_by(ParticipantID, Interface, TaskBlock) %>%
+  summarise(SearchTime = mean(SearchTime, na.rm = TRUE), .groups = "drop")
+
+# Run ART model (without Trial, since it's averaged out)
+m.art.avg <- art(SearchTime ~ Interface * TaskBlock + Error(ParticipantID), data = data_avg)
+
+# ANOVA
+anova_results <- anova(m.art.avg)
+print(anova_results)
+
+# Effect sizes
+eta_squared_results <- eta_squared(anova_results, generalized = TRUE)
+print(format(eta_squared_results, digits=4))
+
+# Contrasts
+art.con(m.art.avg, ~ Interface, adjust = "bonferroni")
+```
+
+```{r}
+# Assuming your cleaned long-format data frame is called df_clean
+# and it has columns: SearchTime, RetrieveTime, DepositTime
+
+# -----------------------------
+# Shapiro-Wilk tests
+# -----------------------------
+shapiro.test(df_clean_search$SearchTime)
+shapiro.test(df_clean_retrieve$RetrieveTime)
+shapiro.test(df_clean_deposit$DepositTime)
+
+# -----------------------------
+# Q-Q plots
+# -----------------------------
+par(mfrow = c(1, 3))  # plot 3 side-by-side
+qqnorm(df_clean_search$SearchTime, main = "Q-Q Plot: Search Time")
+qqline(df_clean_search$SearchTime)
+
+qqnorm(df_clean_retrieve$RetrieveTime, main = "Q-Q Plot: Retrieve Time")
+qqline(df_clean_retrieve$RetrieveTime)
+
+qqnorm(df_clean_deposit$DepositTime, main = "Q-Q Plot: Deposit Time")
+qqline(df_clean_deposit$DepositTime)
+
+# -----------------------------
+# Histograms
+# -----------------------------
+par(mfrow = c(1, 3))  # reset layout
+hist(df_clean_search$SearchTime, breaks = 30, main = "Histogram: Search Time", xlab = "Time")
+hist(df_clean_retrieve$RetrieveTime, breaks = 30, main = "Histogram: Retrieve Time", xlab = "Time")
+hist(df_clean_deposit$DepositTime, breaks = 30, main = "Histogram: Deposit Time", xlab = "Time")
+
+
+```
+
+
+```{r}
+
+# artc_searchtime_avg.R
+library(dplyr)
+library(emmeans)
+library(ARTool)
+library(rstatix)
+library(effectsize)
+
+# Load data
+data <- df_clean_search
+
+# Convert columns
+data$ParticipantID <- as.factor(data$ParticipantID)
+data$Interface <- as.factor(data$Interface)
+# data$TaskBlock <- as.ordered(data$TaskBlock)
+
+# Average per Participant × Interface
+data_avg <- data %>%
+  group_by(ParticipantID, Interface) %>%
+  summarise(SearchTime = mean(SearchTime, na.rm = TRUE), .groups = "drop")
+
+# Run ART model (without Trial, since it's averaged out)
+m.art.avg <- art(SearchTime ~ Interface + Error(ParticipantID), data = data_avg)
+
+# ANOVA
+anova_results <- anova(m.art.avg)
+print(anova_results)
+
+# Effect sizes (partial eta squared)
+eta_squared_results <- eta_squared(anova_results, partial = TRUE)
+print(format(eta_squared_results, digits=4))
+
+# Contrasts
+art.con(m.art.avg, ~ Interface, adjust = "bonferroni")
+```
+
+```{r}
+library(dplyr)
+library(emmeans)
+library(ARTool)
+library(rstatix)
+library(effectsize)
+
+# Load data
+data <- df_clean_retrieve
+
+# Convert columns
+data$ParticipantID <- as.factor(data$ParticipantID)
+data$PreviewPattern <- as.factor(data$PreviewPattern)
+# data$TaskBlock <- as.ordered(data$TaskBlock)
+
+# Average per Participant × Interface
+data_avg <- data %>%
+  group_by(ParticipantID, PreviewPattern) %>%
+  summarise(RetrieveTime = mean(RetrieveTime, na.rm = TRUE), .groups = "drop")
+
+# Run ART model (without Trial, since it's averaged out)
+m.art.avg <- art(RetrieveTime ~ PreviewPattern + Error(ParticipantID), data = data_avg)
+
+# ANOVA
+anova_results <- anova(m.art.avg)
+print(anova_results)
+
+# Effect sizes (partial eta squared)
+eta_squared_results <- eta_squared(anova_results, partial = TRUE)
+print(format(eta_squared_results, digits=4))
+
+# Contrasts
+art.con(m.art.avg, ~ PreviewPattern, adjust = "bonferroni")
+```
+
+
+```{r}
+library(dplyr)
+library(emmeans)
+library(ARTool)
+library(rstatix)
+library(effectsize)
+
+# Load data
+data <- df_clean_deposit
+
+# Convert columns
+data$ParticipantID <- as.factor(data$ParticipantID)
+data$InteractionTechnique <- as.factor(data$InteractionTechnique)
+# data$TaskBlock <- as.ordered(data$TaskBlock)
+
+# Average per Participant × Interface
+data_avg <- data %>%
+  group_by(ParticipantID, InteractionTechnique) %>%
+  summarise(DepositTime = mean(DepositTime, na.rm = TRUE), .groups = "drop")
+
+# Run ART model
+m.art.avg <- art(DepositTime ~ InteractionTechnique + Error(ParticipantID), data = data_avg)
+
+# ANOVA
+anova_results <- anova(m.art.avg)
+print(anova_results)
+
+# Effect sizes (partial eta squared)
+eta_squared_results <- eta_squared(anova_results, partial = TRUE)
+print(format(eta_squared_results, digits=4))
+
+# Contrasts
+art.con(m.art.avg, ~ InteractionTechnique, adjust = "bonferroni")
+```
