@@ -1,6 +1,7 @@
 ```{r}
-# Load CSV
-df = read.csv("C:\\Users\\SREAL\\Lab Users\\mattg\\research\\projects\\world-switch-ui\\experiment\\data\\analysis\\subjective_corrected_inv.csv")
+# Make sure to run loadclean.R first to load and clean data
+
+df = df_subjective
 
 df$Interface <- as.factor(df$Interface_Choice)
 df$Remembered_Choice <- as.factor(df$Remembered_Choice)
@@ -18,58 +19,6 @@ df$Interface <- dplyr::recode(df$Interface,
     "WIM Steering Wheel" = "WIM_WorldWheel"
 )
 
-demographics_df = read.csv("C:\\Users\\SREAL\\Lab Users\\mattg\\research\\projects\\world-switch-ui\\experiment\\data\\questionnaires\\demographics.csv")
-demographics_df$PID = as.factor(demographics_df$ParticipantID)
-demographics_df$Age = as.numeric(demographics_df$Age)
-demographics_df$Sex = as.factor(demographics_df$Sex)
-demographics_df$VR_Exp = as.factor(demographics_df$VR_Exp)
-# print(demographics_df)
-# left join demographics data 
-df <- left_join(df, demographics_df, by = "PID")
-
-# filter out PID 13
-df <- df %>% filter(PID != 13)
-
-length(unique(df$PID))
-
-library(dplyr)
-library(tibble)
-
-# # Technique metadata (excluding TechniqueCount)
-# technique_meta <- tribble(
-#   ~Interface, ~Preview, ~InteractionSpace, ~PreviewSpace, ~InteractionMetaphor,
-#   "WIM_SteeringWheel", "WIM", "Bimanual", "Bimanual", "SteeringWheel",
-#   "WIM_Gallery", "WIM", "OneHanded", "Head", "Gallery",
-#   "WIM_Palette_HeadHand", "WIM", "HeadHand", "Hand", "Palette_Head",
-#   "WIM_Palette_Hand", "WIM", "Bimanual", "Hand", "Palette_Hand",
-#   "Baseline", "None", "OneHanded", "World", "Baseline",
-#   "Portal_SteeringWheel", "Portal", "Bimanual", "Bimanual", "SteeringWheel",
-#   "Portal_Gallery", "Portal", "OneHanded", "Head", "Gallery",
-#   "Portal_Palette_HeadHand", "Portal", "HeadHand", "Hand", "Palette_Head",
-#   "Portal_Palette_Hand", "Portal", "Bimanual", "Hand", "Palette_Hand"
-# )
-
-# # Check that Interface column exists
-# if (!"Interface" %in% names(df)) {
-#   stop("The dataframe must have a column named 'Interface'")
-# }
-
-# # Identify missing techniques
-# existing_choices <- unique(df$Interface)
-# missing_choices <- setdiff(technique_meta$Interface, existing_choices)
-
-# # Create new rows for missing techniques
-# rows_to_add <- technique_meta %>%
-#   filter(Interface %in% missing_choices)
-
-# # Combine original and added rows
-# df_extended <- bind_rows(df, rows_to_add)
-
-# # Join metadata to all rows
-# df_final <- df_extended %>%
-#   left_join(technique_meta, by = "Interface")
-
-
 # Convert TLX items to long format
 df_long <- df %>%
   tidyr::pivot_longer(cols = starts_with("TLX"), names_to = "TLX_Item", values_to = "Score") %>%
@@ -81,32 +30,10 @@ df_long <- df %>%
                            "TLX_5_1" = "tlx_effort",
                            "TLX_6_1" = "tlx_frustration"))
 
-# Create boxplots for each TLX question, grouped by Interface
-tlx_everyQ = ggplot(df_long, aes(x = Interface, y = Score, fill = Interface)) +
-  geom_boxplot() +
-  facet_wrap(~ TLX_Item, scales = "free_y") +
-  theme_minimal() +
-  labs(title = "Boxplots of TLX Scores by Technique", x = "Interface Choice", y = "Score") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "none")
-
-tlx_everyQ
-
 # Compute average TLX score
 tlx_cols <- grep("^TLX_\\d+_1$", names(df), value = TRUE)
 print(tlx_cols)
 df$tlx_all = rowMeans(df[tlx_cols], na.rm = TRUE)
-# df <- df %>%
-#   mutate(TLX_All = rowMeans(select(., starts_with("TLX_")), na.rm = TRUE))
-
-# Boxplot of overall TLX scores by interface
-tlx_overall = ggplot(df, aes(x = Interface, y = tlx_all, fill = Interface)) +
-  geom_boxplot() +
-  theme_minimal() +
-  labs(title = "Overall TLX Score by Interface", x = "Interface Choice", y = "Average TLX Score") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position  = "none")
-tlx_overall
 
 # Identify SUS columns
 sus_cols <- grep("^SUS_\\d+_1$", names(df), value = TRUE)
@@ -114,18 +41,6 @@ print(sus_cols)
 
 # Calculate SUS total score (commonly scaled to 0–100)
 df$sus_score <- rowSums(df[sus_cols]) * 2.5  # 10 items * 2.5 = 100 max
-
-# Boxplot of SUS scores across all participants
-sus = ggplot(df, aes(x = Interface, y = sus_score, fill = Interface)) +
-  geom_boxplot() +
-  theme_minimal() +
-  labs(title = "SUS Scores by Interface", x = "Interface Choice", y = "SUS Score (0–100)") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "none")
-sus
-
-#####################
-# UEQ
 
 # Get all UEQ columns (assuming UEQ_1_1 to UEQ_1_8 style)
 ueq_cols <- grep("^UEQ_\\d+_\\d+(\\.\\d+)?$", names(df), value = TRUE)
@@ -147,26 +62,6 @@ df_ueq_long <- df %>%
   select(Interface, UEQ_Practical, UEQ_Hedonic, UEQ_Overall) %>%
   tidyr::pivot_longer(cols = starts_with("UEQ"), names_to = "UEQ_Type", values_to = "Score")
 
-# Create box plots
-ueq_all = ggplot(df_ueq_long, aes(x = Interface, y = Score, fill = Interface)) +
-  geom_boxplot() +
-  facet_wrap(~ UEQ_Type) +
-  theme_minimal() +
-  labs(title = "UEQ Scores by Interface", x = "Interface Choice", y = "Score") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "none")
-
-ueq_all
-
-# just hedonic category of the UEQ
-ueq_hedonic = ggplot(df, aes(x = Interface, y = UEQ_Hedonic, fill = Interface)) +
-  geom_boxplot() +
-  theme_minimal() +
-  labs(title = "Hedonic UEQ Scores by Interface", x = "Interface Choice", y = "Score") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "none")
-ueq_hedonic
-
 # get Cont columns
 cont_cols <- grep("^Cont_\\d+_1$", names(df), value = TRUE)
 df$cont_avg = rowMeans(df[cont_cols], na.rm = TRUE)
@@ -187,7 +82,7 @@ library(effectsize)
 data <- df_subjective
 
 # Ensure columns are set right
-data$ParticipantID <- as.factor(data$ParticipantID)
+data$ParticipantID <- as.factor(data$PID)
 data$Interface <- as.factor(data$Interface)
 
 # UEQ HEDONIC
@@ -257,9 +152,6 @@ art.con(m.art.avg, ~ Interface, adjust = "bonferroni")
 NASA TLX
 ```{r}
 # NASA TLX
-# Ensure columns are set right
-data$ParticipantID <- as.factor(data$ParticipantID)
-data$Interface <- as.factor(data$Interface)
 
 data %>%
     group_by(Interface) %>%
@@ -291,8 +183,6 @@ art.con(m.art.avg, ~ Interface, adjust = "bonferroni")
 SUS
 ```{r}
 #SUS
-# Run ART model
-m.art.avg <- art(sus_score ~ Interface + Error(ParticipantID), data = data)
 
 data %>%
     group_by(Interface) %>%
@@ -305,6 +195,9 @@ data %>%
         ci_upper = mean_sus + qt(0.975, df = n - 1) * se
     ) %>%
     print()
+
+# Run ART model
+m.art.avg <- art(sus_score ~ Interface + Error(ParticipantID), data = data)
 
 # ANOVA
 anova_results <- anova(m.art.avg)

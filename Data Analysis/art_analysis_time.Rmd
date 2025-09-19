@@ -1,79 +1,5 @@
 ```{r}
-# artc_searchtime_numeric.R
-library(dplyr)
-library(emmeans)
-library(ARTool)
-library(rstatix)
-library(effectsize)
-
-options(width=200)
-
-# Load data
-data <- df_clean_search
-
-# Convert columns
-data$ParticipantID <- as.factor(data$ParticipantID)
-data$Interface <- as.factor(data$Interface)
-data$TaskBlock <- as.ordered(data$TaskBlock)
-data$Trial <- as.ordered(data$Trial)
-# Trial remains numeric (trend modeling)
-
-# Run ART model
-m.art <- art(SearchTime ~ Interface * Trial * TaskBlock + Error(ParticipantID), data = data)
-
-# ANOVA
-anova_results <- anova(m.art)
-print(anova_results)
-
-# Effect sizes
-eta_squared_results <- eta_squared(anova_results, generalized = TRUE)
-print(format(eta_squared_results, digits=4))
-
-# Contrasts (Interface × TaskBlock, keeping Trial as numeric covariate)
-art.con(m.art, ~ Interface, adjust = "bonferroni")
-```
-
-```{r}
-
-# artc_searchtime_avg.R
-library(dplyr)
-library(emmeans)
-library(ARTool)
-library(rstatix)
-library(effectsize)
-
-# Load data
-data <- df_clean_search
-
-# Convert columns
-data$ParticipantID <- as.factor(data$ParticipantID)
-data$Interface <- as.factor(data$Interface)
-data$TaskBlock <- as.ordered(data$TaskBlock)
-
-# Average per Participant × Interface × TaskBlock
-# (Trial dropped since we're collapsing across it)
-data_avg <- data %>%
-  group_by(ParticipantID, Interface, TaskBlock) %>%
-  summarise(SearchTime = mean(SearchTime, na.rm = TRUE), .groups = "drop")
-
-# Run ART model (without Trial, since it's averaged out)
-m.art.avg <- art(SearchTime ~ Interface * TaskBlock + Error(ParticipantID), data = data_avg)
-
-# ANOVA
-anova_results <- anova(m.art.avg)
-print(anova_results)
-
-# Effect sizes
-eta_squared_results <- eta_squared(anova_results, generalized = TRUE)
-print(format(eta_squared_results, digits=4))
-
-# Contrasts
-art.con(m.art.avg, ~ Interface, adjust = "bonferroni")
-```
-
-```{r}
-# Assuming your cleaned long-format data frame is called df_clean
-# and it has columns: SearchTime, RetrieveTime, DepositTime
+# Make sure to run loadclean.R first to load and clean data
 
 # -----------------------------
 # Shapiro-Wilk tests
@@ -109,6 +35,8 @@ hist(df_clean_deposit$DepositTime, breaks = 30, main = "Histogram: Deposit Time"
 
 ```{r}
 
+options(width=200)
+
 # artc_searchtime_avg.R
 library(dplyr)
 library(emmeans)
@@ -118,6 +46,10 @@ library(effectsize)
 
 # Load data
 data <- df_clean_search
+
+# print all PIDs
+print(unique(data$ParticipantID))
+length(unique(data$ParticipantID))
 
 # Convert columns
 data$ParticipantID <- as.factor(data$ParticipantID)

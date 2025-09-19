@@ -1,0 +1,199 @@
+PID,Interface_Choice,Remember,TLX_1_1,TLX_2_1,TLX_3_1,TLX_4_1,TLX_5_1,TLX_6_1,SUS_1_1,SUS_2_1,SUS_3_1,SUS_4_1,SUS_5_1,SUS_6_1,SUS_7_1,SUS_8_1,SUS_9_1,SUS_10_1,UEQ_1_1,UEQ_1_2,UEQ_1_3,UEQ_1_4,UEQ_1_5,UEQ_1_6,UEQ_1_7,UEQ_1_8,Cont_1_1,Cont_2_1,Cont_3_1
+1,Baseline - static menu with ray-based selection,Yes,7,2,1,3,6,6,1,5,1,5,0,5,3,2,1,5,4,6,2,6,2,2,2,2,2,1,5
+1,Portal - head-reference with linear menu,Yes,1,1,1,1,2,2,3,5,3,5,3,5,3,5,3,5,7,7,7,6,7,7,7,7,7,7,6
+1,Portal - Palette with hand-based selections,Yes,3,5,1,5,6,2,2,4,2,5,2,5,3,4,2,5,6,6,5,6,6,6,6,6,6,6,7
+1,Portal - Palette with head-based selections,Yes,5,7,1,7,6,6,-1,1,-1,5,-1,3,0,1,0,5,2,5,1,5,4,4,5,5,6,6,6
+1,Portal - Steering wheel,Yes,2,7,1,1,3,1,3,5,3,5,3,5,3,5,2,5,6,6,6,7,6,7,7,7,7,7,6
+1,WIM - head-referenced with linear menu,Yes,1,6,1,3,6,5,1,2,1,5,1,4,1,2,1,2,5,4,3,4,4,4,4,4,5,5,7
+1,WIM - Palette with hand-based selections,Yes,1,5,1,1,5,1,3,5,3,5,3,5,3,5,3,5,7,7,7,7,7,7,7,7,7,7,6
+1,WIM - Palette with head-based selections,Yes,4,7,1,6,7,7,0,3,-1,5,1,4,1,1,-1,5,4,4,4,4,4,4,4,4,6,6,6
+1,WIM - Steering wheel,Yes,1,5,1,1,2,1,3,5,3,5,3,5,3,5,3,5,7,7,7,7,7,7,7,7,7,7,7
+2,Baseline - static menu with ray-based selection,Yes,2,2,2,6,2,2,1,3,1,3,1,3,1,3,1,3,4,4,4,4,4,4,4,4,4,4,4
+2,Portal - head-reference with linear menu,Yes,3,3,3,5,3,3,2,2,2,2,2,2,2,2,2,2,4,4,4,4,4,4,4,4,4,4,4
+2,Portal - Palette with hand-based selections,Yes,5,5,6,2,5,6,1,3,1,3,1,3,1,3,1,3,4,4,4,4,4,4,4,4,4,4,4
+2,Portal - Palette with head-based selections,Yes,1,1,1,1,1,1,3,1,3,1,3,1,3,1,3,1,7,7,7,7,7,7,7,7,7,6,6
+2,Portal - Steering wheel,Yes,4,4,4,4,4,4,1,3,1,3,1,3,1,3,1,3,4,4,4,4,4,4,4,4,4,4,4
+2,WIM - head-referenced with linear menu,Yes,4,4,4,4,4,4,1,3,1,3,1,3,1,3,1,3,4,4,4,4,4,4,4,4,4,4,4
+2,WIM - Palette with hand-based selections,Yes,5,6,5,5,5,5,1,4,1,4,1,4,0,3,1,3,3,2,3,2,3,2,2,2,4,4,4
+2,WIM - Palette with head-based selections,Yes,6,7,6,1,7,6,2,2,2,5,3,5,3,5,3,5,7,7,7,7,7,7,7,7,7,7,3
+2,WIM - Steering wheel,Yes,4,4,4,4,4,4,1,3,1,3,1,3,1,3,1,3,4,4,4,4,4,4,4,4,4,4,4
+3,Baseline - static menu with ray-based selection,Yes,2,2,1,2,2,2,2,5,3,5,3,5,3,5,3,5,6,6,7,7,5,4,2,2,6,4,7
+3,Portal - head-reference with linear menu,Yes,3,5,2,2,5,1,0,2,2,4,1,4,2,2,2,5,3,3,2,5,3,5,5,5,5,5,6
+3,Portal - Palette with hand-based selections,Yes,2,5,2,2,5,2,0,2,0,4,2,4,1,2,1,4,3,3,2,5,4,5,4,4,5,5,5
+3,Portal - Palette with head-based selections,Yes,6,6,1,2,6,5,-1,1,-1,4,0,4,-1,1,0,4,2,2,2,3,4,5,5,5,5,5,2
+3,Portal - Steering wheel,Yes,6,6,1,2,7,6,-1,5,-1,2,0,4,-1,2,0,4,1,1,1,2,4,4,5,5,5,5,1
+3,WIM - head-referenced with linear menu,Yes,2,2,2,1,2,2,2,4,3,5,2,5,2,5,3,5,6,6,7,6,4,6,5,5,5,5,7
+3,WIM - Palette with hand-based selections,Yes,1,1,1,1,1,1,3,5,3,5,3,5,3,5,3,5,6,7,7,7,6,5,5,5,7,7,7
+3,WIM - Palette with head-based selections,Yes,3,5,2,2,5,5,0,2,0,5,2,4,0,2,1,4,2,3,2,4,4,5,5,5,5,5,6
+3,WIM - Steering wheel,Yes,5,6,3,1,5,5,0,2,0,2,0,4,-1,2,0,4,3,3,2,3,2,5,5,4,5,4,3
+4,Baseline - static menu with ray-based selection,Yes,1,1,3,1,2,1,1,5,3,5,3,5,3,5,3,5,6,6,6,6,4,4,3,3,7,7,2
+4,Portal - head-reference with linear menu,Yes,2,1,2,1,1,1,3,5,3,5,3,3,3,5,3,5,7,6,7,6,4,4,4,3,7,7,7
+4,Portal - Palette with hand-based selections,Yes,1,1,2,1,1,1,3,5,3,5,0,4,3,5,3,5,7,7,7,7,7,7,7,7,7,7,6
+4,Portal - Palette with head-based selections,Yes,3,5,5,2,4,7,0,4,0,4,3,2,0,2,0,4,1,1,1,1,1,1,1,1,7,7,4
+4,Portal - Steering wheel,Yes,3,3,2,2,3,2,1,4,2,5,2,4,-1,5,2,5,4,5,6,6,4,3,3,3,5,5,6
+4,WIM - head-referenced with linear menu,Yes,2,2,2,1,5,4,2,2,1,5,0,2,0,5,2,5,6,6,7,7,7,6,2,2,6,3,6
+4,WIM - Palette with hand-based selections,Yes,1,1,1,2,2,3,1,5,2,5,2,4,3,5,2,5,5,4,6,5,4,4,4,4,6,2,6
+4,WIM - Palette with head-based selections,Yes,1,1,1,1,3,2,3,5,2,5,3,5,-1,5,2,5,5,4,4,4,4,4,4,4,7,3,5
+4,WIM - Steering wheel,Yes,1,1,1,1,3,1,3,5,-1,5,2,5,3,5,3,5,7,7,5,6,6,7,6,4,4,4,4
+5,Baseline - static menu with ray-based selection,Yes,4,5,4,5,5,4,0,3,2,2,1,3,1,2,2,2,6,5,6,6,6,6,4,4,5,5,2
+5,Portal - head-reference with linear menu,Yes,4,6,6,2,6,6,1,4,3,1,2,2,2,4,2,2,6,6,6,5,6,6,5,5,6,6,2
+5,Portal - Palette with hand-based selections,Yes,5,3,3,3,3,5,2,2,0,2,2,4,1,3,3,3,6,6,6,6,5,6,4,4,5,5,2
+5,Portal - Palette with hand-based selections,Yes,4,5,6,2,6,4,1,2,1,2,2,2,2,3,1,4,6,6,6,6,6,6,6,6,4,5,4
+5,Portal - Steering wheel,Yes,4,3,5,4,3,3,2,2,1,3,1,2,1,2,1,4,6,6,6,5,6,6,6,6,6,5,2
+5,WIM - head-referenced with linear menu,Yes,3,3,6,1,7,2,0,3,1,2,2,2,2,2,2,2,6,5,5,5,6,6,6,6,5,6,3
+5,WIM - Palette with hand-based selections,Yes,6,6,6,4,3,4,2,2,1,2,2,3,2,3,2,2,6,6,6,5,5,5,6,6,6,5,2
+5,WIM - Palette with head-based selections,Yes,5,4,4,1,3,6,1,3,0,4,2,3,2,2,2,2,6,6,6,6,5,5,6,6,5,5,2
+5,WIM - Steering wheel,Yes,4,4,5,1,5,4,2,3,2,2,1,3,1,2,1,3,6,6,5,5,6,5,5,4,6,5,4
+6,Baseline - static menu with ray-based selection,Yes,2,2,2,3,2,3,1,5,3,5,2,5,3,4,1,5,4,7,7,7,2,2,2,2,2,3,5
+6,Portal - head-reference with linear menu,Yes,2,2,2,2,2,4,0,3,1,5,1,4,2,3,1,5,3,3,3,3,5,4,5,5,5,4,5
+6,Portal - Palette with hand-based selections,Yes,2,2,2,2,2,1,2,4,2,5,2,4,3,4,2,5,6,4,5,4,5,5,6,5,6,5,6
+6,Portal - Palette with head-based selections,Yes,2,2,2,3,3,4,0,2,0,5,0,3,1,2,0,5,2,3,3,5,3,4,5,5,5,4,5
+6,Portal - Steering wheel,Yes,2,2,2,2,2,2,2,4,2,5,2,4,2,4,2,5,6,5,5,4,5,6,5,6,6,5,6
+6,WIM - head-referenced with linear menu,Yes,2,2,2,3,2,3,1,4,1,5,1,5,2,4,0,5,3,4,3,5,3,3,5,4,5,5,6
+6,WIM - Palette with hand-based selections,Yes,2,2,2,2,2,2,2,3,1,5,2,4,2,3,1,5,5,4,4,5,3,3,5,4,5,5,6
+6,WIM - Palette with head-based selections,Yes,2,2,2,2,2,4,0,3,0,5,1,3,0,2,0,5,3,3,3,4,3,3,5,5,5,5,5
+6,WIM - Steering wheel,Yes,2,2,2,1,2,1,3,5,3,5,2,5,1,5,3,5,6,4,6,5,6,6,6,7,6,5,7
+7,Baseline - static menu with ray-based selection,Yes,2,3,3,3,3,1,1,3,2,5,0,2,1,3,1,5,3,4,3,5,5,5,5,4,4,3,4
+7,Portal - head-reference with linear menu,Yes,2,3,3,3,3,1,0,3,0,5,1,3,2,3,1,5,4,4,3,4,4,4,5,4,4,3,4
+7,Portal - Palette with hand-based selections,Yes,1,1,1,1,1,1,2,4,2,5,2,4,3,4,3,5,5,5,6,6,4,4,4,4,5,4,5
+7,Portal - Palette with head-based selections,Yes,2,4,5,3,5,1,0,3,0,5,0,3,1,2,1,5,4,3,3,5,4,4,5,4,3,3,3
+7,Portal - Steering wheel,Yes,4,3,4,2,3,1,2,4,2,5,1,4,3,4,2,5,5,6,6,6,6,6,6,6,5,5,6
+7,WIM - head-referenced with linear menu,Yes,2,3,2,2,3,1,0,3,0,5,1,4,2,3,2,5,5,5,5,5,5,6,6,6,5,5,5
+7,WIM - Palette with hand-based selections,Yes,1,1,1,1,1,1,2,5,2,5,2,4,3,5,3,5,6,6,6,6,4,4,4,4,5,4,6
+7,WIM - Palette with head-based selections,Yes,2,3,2,2,2,1,0,3,0,5,0,3,2,2,1,5,4,4,3,4,4,3,4,4,4,3,4
+7,WIM - Steering wheel,Yes,1,1,1,1,1,1,2,5,3,5,2,5,3,4,3,5,6,6,6,6,5,5,5,5,5,5,6
+9,Baseline - static menu with ray-based selection,Yes,2,3,3,4,3,5,-1,5,3,5,3,5,3,5,3,5,5,7,4,7,1,2,1,1,7,1,1
+9,Portal - head-reference with linear menu,Yes,6,7,6,3,7,6,-1,2,1,1,2,4,-1,1,2,4,3,3,1,2,5,5,7,5,7,2,2
+9,Portal - Palette with hand-based selections,Yes,2,5,4,3,5,3,2,3,2,4,3,5,2,4,2,4,6,6,7,5,7,7,7,7,7,7,7
+9,Portal - Palette with head-based selections,Yes,3,6,6,2,6,5,0,1,0,2,2,4,1,2,2,4,3,4,2,3,2,2,6,6,7,6,6
+9,Portal - Steering wheel,Yes,2,4,3,2,3,3,2,4,2,3,3,5,2,5,3,5,7,7,7,5,6,7,7,7,7,7,6
+9,WIM - head-referenced with linear menu,Yes,7,6,7,4,7,7,-1,2,0,1,2,4,0,1,1,2,2,2,2,2,2,5,7,6,7,2,5
+9,WIM - Palette with hand-based selections,Yes,2,2,2,1,2,2,3,5,3,5,3,5,3,4,3,5,7,7,7,6,6,6,7,7,7,7,5
+9,WIM - Palette with head-based selections,Yes,5,7,5,2,6,4,0,1,1,2,2,4,2,4,3,3,5,3,4,3,3,5,6,6,7,7,1
+9,WIM - Steering wheel,Yes,2,3,1,1,2,2,3,5,2,4,3,5,2,4,2,5,7,7,7,6,7,7,7,7,7,2,5
+10,Baseline - static menu with ray-based selection,Yes,3,4,3,6,5,7,0,3,0,3,1,4,2,2,0,5,3,4,3,5,2,2,4,3,4,2,3
+10,Portal - head-reference with linear menu,Yes,2,5,5,2,3,3,2,4,2,3,2,4,2,4,2,5,5,5,5,6,4,6,7,5,5,5,5
+10,Portal - Palette with hand-based selections,Yes,3,5,5,3,5,5,0,3,2,4,2,4,2,4,2,5,5,4,3,6,3,4,3,2,3,3,3
+10,Portal - Palette with head-based selections,Yes,6,6,6,4,5,7,-1,1,0,3,0,2,0,1,-1,3,2,1,1,2,1,1,2,4,1,1,2
+10,Portal - Steering wheel,Yes,6,7,5,5,6,6,-1,3,0,2,1,3,1,3,0,5,3,3,3,6,3,2,4,4,4,3,3
+10,WIM - head-referenced with linear menu,Yes,3,6,3,2,6,4,0,2,1,2,3,4,1,2,1,4,5,5,5,6,6,7,7,7,5,5,5
+10,WIM - Palette with hand-based selections,Yes,5,4,4,3,4,3,0,2,1,4,1,3,2,3,1,4,4,5,4,4,5,6,6,6,3,3,4
+10,WIM - Palette with head-based selections,Yes,3,5,3,4,3,5,0,2,1,3,2,4,1,3,1,4,4,4,4,5,4,3,3,3,4,4,5
+10,WIM - Steering wheel,Yes,3,5,4,3,5,4,1,4,2,5,2,4,2,4,2,5,6,6,6,7,6,7,7,6,6,6,5
+11,Baseline - static menu with ray-based selection,Yes,4,1,5,3,3,2,2,5,2,5,2,5,3,5,2,5,4,7,3,7,2,2,1,1,7,7,3
+11,Portal - head-reference with linear menu,Yes,2,3,2,1,1,1,3,5,3,5,3,5,3,5,3,5,7,7,7,7,6,6,6,6,7,7,7
+11,Portal - Palette with hand-based selections,Yes,1,1,1,1,1,1,3,5,3,5,3,5,3,5,3,5,7,7,7,7,6,6,6,6,7,7,7
+11,Portal - Palette with head-based selections,Yes,6,7,5,6,7,6,-1,3,-1,5,1,3,2,1,-1,4,1,1,1,1,5,5,5,5,5,5,3
+11,Portal - Steering wheel,Yes,1,3,2,2,2,2,2,4,1,5,3,5,3,4,3,5,6,5,5,6,5,5,5,5,7,7,7
+11,WIM - head-referenced with linear menu,Yes,2,1,2,1,1,1,3,5,3,5,3,5,3,5,3,5,5,6,5,5,6,6,6,6,6,6,6
+11,WIM - Palette with hand-based selections,Yes,1,1,1,1,1,1,3,5,3,5,3,5,3,5,3,5,7,7,7,7,5,5,6,6,7,7,7
+11,WIM - Palette with head-based selections,Yes,5,7,6,7,5,5,-1,1,-1,5,1,4,0,1,0,5,2,2,2,3,3,3,6,6,5,5,5
+11,WIM - Steering wheel,Yes,5,6,5,5,6,5,-1,3,0,5,0,2,2,1,-1,4,2,2,2,4,5,5,5,5,5,5,4
+12,Baseline - static menu with ray-based selection,Yes,1,1,1,7,1,1,-1,5,3,5,3,5,3,5,3,5,1,7,7,7,1,1,1,1,1,1,7
+12,Portal - head-reference with linear menu,Yes,1,2,1,1,1,2,3,5,3,5,2,4,3,4,3,5,7,7,7,7,2,2,4,4,7,7,7
+12,Portal - Palette with hand-based selections,Yes,3,5,3,4,5,4,-1,3,-1,5,0,3,1,1,0,5,5,1,1,1,3,5,4,4,7,7,6
+12,Portal - Palette with head-based selections,Yes,3,1,1,5,1,3,-1,5,1,5,-1,2,3,2,0,5,2,3,5,6,1,1,1,1,5,6,3
+12,Portal - Steering wheel,Yes,4,2,1,1,3,1,-1,4,2,5,1,5,2,5,3,5,7,7,5,7,5,5,7,4,7,7,1
+12,WIM - head-referenced with linear menu,Yes,1,2,1,1,2,1,3,5,2,5,3,5,3,5,2,5,6,7,7,7,1,1,3,4,1,1,7
+12,WIM - Palette with hand-based selections,Yes,1,4,1,3,3,4,-1,4,-1,5,-1,2,3,1,0,5,5,7,1,3,2,3,1,1,2,2,7
+12,WIM - Palette with head-based selections,Yes,2,1,1,3,1,3,0,4,2,5,1,5,3,5,1,5,5,5,4,7,1,1,1,1,1,1,7
+12,WIM - Steering wheel,Yes,4,4,3,4,3,5,-1,5,0,5,0,4,0,2,0,5,5,2,1,1,5,5,7,7,7,7,5
+14,Baseline - static menu with ray-based selection,Yes,5,1,2,4,2,2,1,5,3,5,2,5,3,1,2,5,4,7,2,7,1,1,1,1,2,1,6
+14,Portal - head-reference with linear menu,Yes,5,5,6,6,6,6,2,4,0,5,2,5,2,2,0,5,2,3,1,7,7,7,7,7,7,7,5
+14,Portal - Palette with hand-based selections,Yes,6,7,7,6,6,6,-1,2,0,5,2,3,2,1,0,5,2,2,1,7,7,7,7,6,2,3,5
+14,Portal - Palette with head-based selections,Yes,6,7,6,6,6,7,-1,3,-1,5,0,3,0,1,0,4,2,3,2,7,6,6,6,6,7,7,6
+14,Portal - Steering wheel,Yes,5,7,6,7,7,6,0,5,0,5,0,5,3,2,2,4,1,1,3,7,7,7,7,7,6,7,3
+14,WIM - head-referenced with linear menu,Yes,1,3,2,2,4,5,1,4,2,5,3,5,3,2,2,4,6,7,6,6,6,7,7,6,5,6,7
+14,WIM - Palette with hand-based selections,Yes,3,5,5,3,5,5,1,3,0,5,1,4,2,2,1,3,5,5,5,7,3,3,1,1,5,5,3
+14,WIM - Palette with head-based selections,Yes,1,3,1,1,2,1,3,5,2,5,3,5,3,5,3,4,5,7,7,7,7,7,5,5,7,6,5
+14,WIM - Steering wheel,Yes,2,6,6,4,7,7,-1,1,0,5,0,4,-1,1,0,3,1,4,1,7,3,6,6,5,7,7,2
+15,Baseline - static menu with ray-based selection,Yes,5,5,4,2,5,4,3,4,3,5,3,5,3,5,3,5,6,7,4,7,7,7,7,4,7,7,6
+15,Portal - head-reference with linear menu,Yes,4,7,4,4,6,4,1,4,2,4,1,4,1,4,1,4,5,5,5,5,5,5,5,5,5,5,6
+15,Portal - Palette with hand-based selections,Yes,2,4,4,1,5,4,3,5,3,4,1,5,3,5,3,5,7,7,7,7,7,7,7,7,7,7,7
+15,Portal - Palette with head-based selections,Yes,5,6,5,2,6,6,1,3,0,4,0,3,1,2,2,4,3,5,4,5,4,5,4,4,4,4,4
+15,Portal - Steering wheel,Yes,4,4,4,1,5,4,3,4,3,4,3,5,3,4,3,4,7,7,7,7,7,7,7,7,6,6,6
+15,WIM - head-referenced with linear menu,Yes,5,5,5,2,4,2,3,5,3,5,3,5,2,5,3,5,6,6,6,6,6,6,6,5,7,7,7
+15,WIM - Palette with hand-based selections,Yes,5,4,4,1,5,4,3,5,3,5,3,5,3,5,3,5,7,7,7,7,7,7,7,7,7,7,6
+15,WIM - Palette with head-based selections,Yes,5,5,4,1,5,2,3,5,3,5,3,4,3,5,3,5,7,7,7,7,7,7,7,7,7,7,7
+15,WIM - Steering wheel,Yes,5,5,5,1,5,2,3,5,3,5,3,5,3,5,3,5,7,7,7,7,7,7,7,7,7,7,7
+16,Baseline - static menu with ray-based selection,Yes,7,3,7,4,7,5,0,5,3,4,3,5,3,2,3,5,6,7,2,7,1,1,1,2,2,3,2
+16,Portal - head-reference with linear menu,Yes,6,6,6,3,7,5,0,4,1,3,3,5,0,4,0,5,7,5,2,6,6,6,7,7,6,3,3
+16,Portal - Palette with hand-based selections,Yes,6,6,6,4,7,6,0,2,2,4,2,5,-1,2,0,5,5,6,2,5,6,6,7,7,3,3,3
+16,Portal - Palette with head-based selections,Yes,7,6,6,4,7,6,-1,2,0,4,1,4,-1,1,0,4,2,3,2,3,5,5,5,3,3,1,2
+16,Portal - Steering wheel,Yes,2,4,4,2,3,1,2,4,2,4,2,4,1,3,3,4,6,5,6,5,7,7,7,6,6,5,4
+16,WIM - head-referenced with linear menu,Yes,2,2,3,2,5,2,2,4,1,5,3,5,2,4,2,5,6,5,4,5,3,3,5,5,6,6,6
+16,WIM - Palette with hand-based selections,Yes,1,1,2,1,2,1,3,5,3,5,3,5,2,5,2,3,7,6,7,6,7,7,7,7,6,6,6
+16,WIM - Palette with head-based selections,Yes,3,5,3,2,6,2,-1,2,0,4,3,4,0,2,0,4,4,3,3,3,5,5,6,3,4,4,3
+16,WIM - Steering wheel,Yes,1,1,2,1,1,1,3,5,3,4,3,5,2,5,3,5,7,5,7,7,7,7,7,7,7,7,7
+17,Baseline - static menu with ray-based selection,Yes,1,1,5,6,5,5,0,5,3,5,3,5,3,5,3,5,6,7,1,7,1,1,1,1,2,1,4
+17,Portal - head-reference with linear menu,Yes,5,5,4,3,3,4,1,2,1,5,1,3,3,3,0,4,4,3,3,5,4,6,5,5,4,6,5
+17,Portal - Palette with hand-based selections,Yes,2,2,3,2,5,2,1,4,2,5,2,5,3,4,2,5,5,6,3,5,4,6,6,6,6,6,6
+17,Portal - Palette with head-based selections,Yes,6,1,4,3,5,6,0,2,1,5,2,5,3,2,0,5,4,4,3,6,5,5,5,5,6,6,2
+17,Portal - Steering wheel,Yes,2,4,2,2,4,1,2,5,3,5,3,5,3,4,3,5,6,7,5,7,7,7,6,6,7,7,7
+17,WIM - head-referenced with linear menu,Yes,5,2,3,3,5,6,0,2,0,5,0,4,3,2,1,5,4,3,6,6,5,6,6,6,3,3,4
+17,WIM - Palette with hand-based selections,Yes,5,3,2,2,1,2,2,5,2,5,2,5,3,4,3,5,6,6,7,7,4,6,6,6,6,3,7
+17,WIM - Palette with head-based selections,Yes,5,2,3,3,2,3,1,3,2,5,2,5,3,3,2,3,4,5,5,5,6,5,5,5,4,4,4
+17,WIM - Steering wheel,Yes,1,2,1,1,1,1,3,5,3,5,3,5,3,5,3,5,7,7,7,7,5,4,5,5,5,5,7
+18,Baseline - static menu with ray-based selection,Yes,2,2,2,4,2,4,0,3,2,4,1,2,2,3,2,3,3,6,4,5,4,4,4,4,4,3,4
+18,Portal - head-reference with linear menu,Yes,6,2,2,4,5,4,0,3,0,4,2,4,2,3,1,2,2,4,3,3,2,2,4,5,4,3,3
+18,Portal - Palette with hand-based selections,Yes,3,2,2,2,2,2,2,4,2,4,2,4,2,3,2,3,6,6,6,6,6,6,6,6,6,6,5
+18,Portal - Palette with head-based selections,Yes,2,3,2,4,2,4,0,3,1,4,1,3,1,3,2,4,5,3,3,5,4,4,5,5,3,3,3
+18,Portal - Steering wheel,Yes,3,3,2,3,3,4,1,3,2,4,1,3,1,3,2,4,4,5,3,4,4,4,4,4,5,5,4
+18,WIM - head-referenced with linear menu,Yes,2,2,2,2,2,2,2,4,2,4,2,4,2,3,2,4,6,6,6,6,6,6,6,6,6,6,5
+18,WIM - Palette with hand-based selections,Yes,2,2,2,2,2,2,2,4,2,4,2,4,2,3,2,4,6,6,6,6,6,6,6,6,6,6,6
+18,WIM - Palette with head-based selections,Yes,2,3,2,3,3,3,1,3,2,4,1,2,2,3,1,4,5,5,2,4,4,4,4,4,5,5,5
+18,WIM - Steering wheel,Yes,2,2,2,2,2,1,2,4,2,4,2,4,2,3,2,4,6,6,6,6,6,6,6,6,6,6,6
+19,Baseline - static menu with ray-based selection,Yes,6,5,6,2,6,5,2,5,2,5,2,5,3,4,3,5,6,7,5,7,2,4,2,2,3,3,5
+19,Portal - head-reference with linear menu,Yes,5,6,5,2,6,4,0,3,2,4,2,4,2,2,2,4,3,5,5,5,5,6,5,5,4,4,5
+19,Portal - Palette with hand-based selections,Yes,6,6,6,2,7,5,-1,2,2,4,1,2,1,2,2,4,3,4,3,5,4,4,5,4,5,4,5
+19,Portal - Palette with head-based selections,Yes,6,7,6,3,7,6,-1,1,1,4,0,2,0,1,2,2,2,2,1,5,3,4,4,4,4,5,3
+19,Portal - Steering wheel,Yes,5,6,5,2,6,5,0,2,2,4,2,3,2,2,2,4,3,3,2,4,5,6,6,5,5,6,5
+19,WIM - head-referenced with linear menu,Yes,2,3,6,1,4,2,1,4,2,4,2,2,1,4,2,4,6,6,6,6,5,5,5,5,6,4,4
+19,WIM - Palette with hand-based selections,Yes,5,6,5,2,6,4,1,4,2,4,2,2,2,2,2,4,5,6,5,5,4,4,5,4,4,4,4
+19,WIM - Palette with head-based selections,Yes,5,6,5,2,5,5,-1,2,1,4,1,2,0,1,0,3,2,3,2,5,3,4,5,5,3,3,4
+19,WIM - Steering wheel,Yes,2,3,5,1,5,3,2,4,2,4,2,2,2,4,3,4,6,6,6,6,5,5,6,6,5,5,4
+20,Baseline - static menu with ray-based selection,Yes,4,7,5,5,6,6,-1,4,0,5,2,5,3,1,3,5,3,7,2,7,2,2,1,1,1,2,2
+20,Portal - head-reference with linear menu,Yes,6,6,5,4,6,6,-1,2,-1,5,-1,1,0,1,0,3,3,2,4,6,6,6,5,3,3,5,3
+20,Portal - Palette with hand-based selections,Yes,3,4,4,2,3,4,1,2,1,5,1,3,1,3,2,3,5,3,5,6,6,6,3,5,4,6,4
+20,Portal - Palette with head-based selections,Yes,3,3,4,3,4,3,1,3,2,5,1,3,1,4,2,3,5,5,5,6,6,6,5,5,4,6,4
+20,Portal - Steering wheel,Yes,4,5,4,2,4,3,1,3,2,5,2,3,2,4,2,4,5,4,5,6,5,5,4,4,4,6,4
+20,WIM - head-referenced with linear menu,Yes,6,6,4,4,5,5,0,2,0,5,-1,1,0,1,0,3,7,2,5,7,6,6,3,5,4,3,4
+20,WIM - Palette with hand-based selections,Yes,3,4,3,2,3,3,3,3,1,5,1,3,2,3,2,4,7,3,7,7,7,7,3,5,7,4,6
+20,WIM - Palette with head-based selections,Yes,2,3,3,1,2,3,3,4,2,5,1,3,1,4,2,3,7,5,7,7,7,7,5,5,7,4,7
+20,WIM - Steering wheel,Yes,3,4,3,2,3,3,2,4,2,5,2,3,1,4,3,3,7,4,6,7,5,5,4,4,6,4,6
+21,Baseline - static menu with ray-based selection,Yes,5,5,6,4,5,2,1,5,2,4,1,4,2,4,2,4,5,5,3,5,3,3,2,2,5,3,5
+21,Portal - head-reference with linear menu,Yes,5,5,6,3,5,3,2,4,1,4,2,3,1,4,2,2,5,6,5,6,6,5,6,5,3,3,5
+21,Portal - Palette with hand-based selections,Yes,6,5,3,4,5,3,1,4,2,4,2,4,2,4,1,4,5,6,4,6,5,6,6,4,5,6,5
+21,Portal - Palette with head-based selections,Yes,7,6,3,5,6,6,0,3,0,4,0,3,0,1,0,4,2,4,2,5,5,5,5,5,5,5,5
+21,Portal - Steering wheel,Yes,6,5,5,6,6,6,0,3,0,4,2,2,0,2,0,3,1,3,1,5,5,5,5,4,4,4,4
+21,WIM - head-referenced with linear menu,Yes,3,6,3,2,3,2,2,4,2,4,2,4,2,4,3,3,6,6,6,6,7,6,6,6,3,5,5
+21,WIM - Palette with hand-based selections,Yes,3,2,3,2,2,2,2,4,3,4,2,4,2,4,2,4,6,6,7,6,6,6,6,6,3,3,5
+21,WIM - Palette with head-based selections,Yes,6,6,3,3,6,5,0,2,1,4,0,3,2,1,1,4,3,3,3,6,5,5,5,3,3,3,5
+21,WIM - Steering wheel,Yes,2,5,4,2,3,2,2,4,3,4,2,4,1,4,2,4,6,6,6,6,6,6,6,6,5,5,5
+22,Baseline - static menu with ray-based selection,Yes,1,2,5,1,3,3,3,5,3,5,3,5,3,5,3,5,7,7,7,7,4,4,4,4,1,1,7
+22,Portal - head-reference with linear menu,Yes,6,7,5,5,5,6,-1,2,-1,3,2,2,2,1,0,3,6,3,6,2,6,7,7,7,6,5,7
+22,Portal - Palette with hand-based selections,Yes,3,5,3,1,4,2,3,5,3,5,2,5,3,5,3,5,7,7,7,7,6,7,7,7,5,5,7
+22,Portal - Palette with head-based selections,Yes,7,7,7,5,7,7,-1,1,-1,3,0,2,-1,1,0,3,1,1,5,4,7,7,7,7,7,5,6
+22,Portal - Steering wheel,Yes,4,5,5,2,5,3,3,5,2,4,3,5,3,4,2,4,7,3,7,7,7,7,7,7,7,6,7
+22,WIM - head-referenced with linear menu,Yes,7,7,6,5,7,7,-1,1,-1,2,2,4,0,3,0,2,1,1,3,3,7,7,7,7,3,3,4
+22,WIM - Palette with hand-based selections,Yes,2,4,4,1,4,1,3,5,3,5,3,5,3,5,3,5,7,7,7,7,6,7,7,7,6,3,6
+22,WIM - Palette with head-based selections,Yes,6,6,5,3,6,5,-1,2,0,3,2,4,0,2,1,2,2,3,3,4,6,6,6,7,4,4,6
+22,WIM - Steering wheel,Yes,1,4,3,2,2,1,2,5,3,5,2,5,2,5,2,5,7,7,7,7,6,7,7,7,5,2,7
+34,Baseline - static menu with ray-based selection,Yes,1,1,1,4,4,1,1,5,2,5,3,5,3,5,3,5,7,7,2,7,1,1,1,1,2,4,6
+34,Portal - head-reference with linear menu,Yes,2,3,1,2,1,2,0,4,3,5,3,5,3,5,2,5,3,6,3,4,2,2,4,3,4,5,6
+34,Portal - Palette with hand-based selections,Yes,1,1,1,2,2,2,2,5,3,5,3,5,3,5,2,4,5,6,6,6,2,4,2,2,6,3,5
+34,Portal - Palette with head-based selections,Yes,2,2,2,6,3,2,0,4,2,5,2,5,2,5,2,5,6,5,4,6,4,3,3,3,6,6,6
+34,Portal - Steering wheel,Yes,2,3,1,1,3,1,3,5,3,5,3,5,3,5,3,5,6,6,6,7,4,6,6,5,7,7,7
+34,WIM - head-referenced with linear menu,Yes,1,3,1,2,3,2,1,5,2,5,2,4,3,4,1,5,2,6,2,6,1,1,2,4,2,5,6
+34,WIM - Palette with hand-based selections,Yes,2,2,2,2,2,2,3,5,3,5,3,5,1,5,3,5,6,6,6,6,6,6,5,6,6,6,7
+34,WIM - Palette with head-based selections,Yes,4,4,1,3,3,2,1,2,0,5,0,4,2,2,2,5,2,3,3,6,5,5,6,5,2,2,3
+34,WIM - Steering wheel,Yes,2,4,1,2,3,2,3,4,2,5,3,5,2,5,3,5,5,6,6,6,5,6,6,4,7,7,7
+8,Baseline - static menu with ray-based selection,Yes,1,2,4,2,1,2,1,4,2,4,2,5,3,4,3,5,4,6,7,6,2,2,1,1,3,2,5
+8,Portal - head-reference with linear menu,Yes,5,5,6,3,5,5,0,3,1,4,2,4,2,2,1,2,5,5,5,5,4,5,5,3,5,5,5
+8,WIM - Steering wheel,Yes,2,4,3,2,3,2,2,4,2,4,2,4,2,4,3,3,6,6,6,6,7,6,6,6,4,3,6
+8,Portal - Palette with hand-based selections,Yes,6,6,4,3,6,5,0,2,1,4,1,4,2,2,2,4,4,3,3,4,5,4,5,4,5,6,3
+8,WIM - head-referenced with linear menu,Yes,3,5,5,3,3,3,0,2,2,4,2,4,2,2,2,4,5,5,5,4,3,3,2,3,3,3,5
+8,Portal - Palette with head-based selections,Yes,7,6,4,6,6,7,-1,1,-1,4,0,3,1,1,-1,3,1,1,1,1,4,4,6,5,4,5,2
+8,WIM - Palette with head-based selections,Yes,5,6,5,3,5,5,0,4,0,4,1,4,2,2,1,4,3,4,4,4,5,4,5,5,4,3,4
+8,Portal - Steering wheel,Yes,2,3,3,2,3,3,2,4,2,4,3,4,3,4,2,4,6,6,6,6,6,6,6,7,6,5,6
+8,WIM - Palette with hand-based selections,Yes,3,5,4,3,2,4,1,3,1,4,1,4,2,3,2,4,4,5,4,5,4,4,3,3,4,3,4

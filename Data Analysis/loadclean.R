@@ -1,33 +1,19 @@
 # Load ggplot 
-# library(ggplot2)
+library(ggplot2)
 library(dplyr)
-# library(ggpubr)
-# library(rstatix)
-# library(lme4)
-# library(glmmTMB)
-# library(AICcmodavg)
-# library(effects)
-# library(plotly)
-# library(ggforce)
-# library(lvplot)
 
 # Load CSV
-data_basepath = "SET TO THE FULL PATH TO THE WorldSwitchUI GIT REPO"
-
-data_basepath = "C:\\Users\\SREAL\\Lab Users\\mattg\\research\\projects\\world-switch-ui\\experiment\\data\\participants\\complete_working_2"
+data_basepath = "SET TO THE FULL PATH OF THE WorldSwitchUI GIT REPO"
 
 setwd(data_basepath)
 
-# List all CSV files in the directory and its subdirectories
-# motion_file_list = list.files(pattern = "\\_tracking_data.csv$", recursive = TRUE, full.names = TRUE)
-# # interaction_file_list = list.files(pattern = "\\_ObjectCollection_indexed.csv$", recursive = TRUE)
+df_subjective = read.csv(file.path(data_basepath, "subjective.csv"))
+
 interaction_file_list = list.files(pattern = "\\_trial_data.csv$", recursive = TRUE)
-# print(motion_file_list)
 print(interaction_file_list)
 
 combined_data = data.frame()
 
-# temp_data = read.csv(file.path(getwd(), "1\\20250327081021_1_Portal_Gallery_ObjectCollection.csv"))
 
 for (i in 1:length(interaction_file_list)) {
   
@@ -56,9 +42,6 @@ combined_data$InteractionTechnique = as.factor(combined_data$InteractionMetaphor
 combined_data$PreviewPattern = as.factor(combined_data$TechniquePreview)
 combined_data$TechniqueInteractionSpace = as.factor(combined_data$TechniqueInteractionSpace)
 combined_data$TechniquePreivewSpace = as.factor(combined_data$TechniquePreviewSpace)
-
-combined_data = combined_data %>% filter(ParticipantID != 13)
-df_notfive = combined_data %>% filter(Trial > 5)
 
 df = combined_data
 
@@ -128,24 +111,3 @@ ggplot(df_flagged, aes(x = Interface, y = DepositTime, color = is_outlier_deposi
   geom_jitter(width = 0.2, height = 0) +
   theme_minimal() +
   labs(title = "Task Duration per Interface", color = "Outlier")
-
-demographics_df = read.csv("C:\\Users\\SREAL\\Lab Users\\mattg\\research\\projects\\world-switch-ui\\experiment\\data\\questionnaires\\demographics.csv")
-demographics_df$ParticipantID = as.factor(demographics_df$ParticipantID)
-demographics_df$Age = as.numeric(demographics_df$Age)
-demographics_df$Sex = as.factor(demographics_df$Sex)
-demographics_df$VR_Exp = as.factor(demographics_df$VR_Exp)
-# left join demographics data 
-df_clean_search <- left_join(df_clean_search, demographics_df, by = "ParticipantID")
-df_clean_retrieve <- left_join(df_clean_retrieve, demographics_df, by = "ParticipantID")
-df_clean_deposit <- left_join(df_clean_deposit, demographics_df, by = "ParticipantID")
-
-df_clean_search$SearchTime_log <- log(df_clean_search$SearchTime)
-df_clean_retrieve$RetrieveTime_log <- log(df_clean_retrieve$RetrieveTime)
-df_clean_deposit$DepositTime_log <- log(df_clean_deposit$DepositTime)
-
-# # summary(df_clean)
-# unique(df_clean$ParticipantID)
-# cat("Number of participants:", n_distinct(df_clean$ParticipantID), "\n")
-# print(colnames(df_clean))
-
-stop()
