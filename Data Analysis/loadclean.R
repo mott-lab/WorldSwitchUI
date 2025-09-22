@@ -8,6 +8,7 @@ data_basepath = "SET TO THE FULL PATH OF THE WorldSwitchUI GIT REPO"
 setwd(data_basepath)
 
 df_subjective = read.csv(file.path(data_basepath, "subjective.csv"))
+df_ranking = read.csv(file.path(data_basepath, "Interface_Ranking_Counts.csv"), row.names = 1)
 
 interaction_file_list = list.files(pattern = "\\_trial_data.csv$", recursive = TRUE)
 print(interaction_file_list)

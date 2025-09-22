@@ -1,0 +1,7 @@
+```{r}
+# Be sure to run loadclean.R first to load df_ranking
+
+counts_matrix <- as.matrix(df_ranking)
+chisq.test(counts_matrix)
+
+```
