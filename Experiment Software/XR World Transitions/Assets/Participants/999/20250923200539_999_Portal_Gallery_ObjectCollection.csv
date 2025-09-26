@@ -1,0 +1,5 @@
+Timestamp,ParticipantID,TaskType,Technique,TaskBlock,Trial,CoinName,Event,Duration
+9.4644,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+9.4800,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Funland,
+9.6600,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Funland,
+10.0869,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,

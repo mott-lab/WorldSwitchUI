@@ -39,6 +39,14 @@ public class StudyConfigurationManager : MonoBehaviour
     public DominantHand UserDominantHand;
     public SubordinateHand UserSubordinateHand;
 
+    public enum OperationMode
+    {
+        Study,
+        Demo
+    }
+    [SerializeField] private OperationMode operationMode;
+    public OperationMode CurrentOperationMode => operationMode;
+
     [SerializeField] public bool GalleryTrainingComplete;
     public bool TechniqueTrainingComplete;
 

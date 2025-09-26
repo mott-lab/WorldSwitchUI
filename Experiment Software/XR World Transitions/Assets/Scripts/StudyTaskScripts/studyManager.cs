@@ -74,7 +74,7 @@ public class studyManager : MonoBehaviour
     [SerializeField] private bool breakBeforeSettingTechniqueInstructions = false;
 
     private LatinSquareUtil latinSquareUtil;
-    private StudyUIManager studyUIManager;
+    public StudyUIManager studyUIManager;
     // [SerializeField] private TransitionUIType currentTechnique;
 
     // [Header("Select Task Type")]
@@ -410,6 +410,13 @@ public class studyManager : MonoBehaviour
 
     private void Start()
     {
+
+        if (StudyConfigurationManager.Instance.CurrentOperationMode == StudyConfigurationManager.OperationMode.Demo)
+        {
+            Debug.Log("=== DEMO ===");
+            DemoManager.Instance.Init();
+        }
+
         latinSquareUtil = GetComponent<LatinSquareUtil>();
         studyUIManager = GetComponent<StudyUIManager>();
 

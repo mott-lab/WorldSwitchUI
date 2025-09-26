@@ -54,7 +54,7 @@ public class TransitionUIManager : MonoBehaviour
     [SerializeField] private GameObject transitionUI;
     [SerializeField] private GetSwipeTranslation swipeTranslator;
     [SerializeField] private TransitionUIType worldTransitionUIType;
-    public TransitionUIType WorldTransitionUIType { get => worldTransitionUIType; }
+    public TransitionUIType WorldTransitionUIType { get => worldTransitionUIType; set => worldTransitionUIType = value; }
 
     [SerializeField] private float galleryCurveLayoutScrollStart;
     public float GalleryCurveLayoutScrollStart { get => galleryCurveLayoutScrollStart; }
@@ -108,6 +108,9 @@ public class TransitionUIManager : MonoBehaviour
 
     public void HandleWorldTransitionUITypeChanged()
     {
+        // TODO: turn off current interface
+        CurrentTransitionInterface?.InterfaceObject.SetActive(false);
+
         // Add your logic here to handle the change in worldTransitionUIType
         Debug.Log("worldTransitionUIType has been changed to: " + worldTransitionUIType);
         switch (worldTransitionUIType)
@@ -159,6 +162,7 @@ public class TransitionUIManager : MonoBehaviour
         ActivateSelectedInterface();
         UpdateTutorialVideo();
         InteractionManager.ActivateSelectedInteractionHandler();
+        studyManager.Instance.studyUIManager.SetUpTechniqueTrainingUI(worldTransitionUIType);
     }
 
     public void UpdateTutorialVideo()

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.XR.Hands;
 
@@ -83,5 +84,12 @@ public class XRComponents : MonoBehaviour
     public TextMeshProUGUI TechniqueTitle;
     public TextMeshProUGUI TechniqueDescription;
     public VideoPlayer TutotialVideoPlayer;
+
+    [Header("Demo Components")]
+    public GameObject DemoUIParent;
+    public TMPro.TMP_Dropdown PreviewSelectorDropdown;
+    public GameObject PreviewSelectionReminder;
+    public TMPro.TMP_Dropdown InteractionSelectorDropdown;
+    public GameObject InteractionSelectionReminder;
 
 }
