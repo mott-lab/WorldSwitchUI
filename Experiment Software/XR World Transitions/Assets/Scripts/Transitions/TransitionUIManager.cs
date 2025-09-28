@@ -162,7 +162,7 @@ public class TransitionUIManager : MonoBehaviour
         ActivateSelectedInterface();
         UpdateTutorialVideo();
         InteractionManager.ActivateSelectedInteractionHandler();
-        if (studyManager.Instance != null)
+        if (studyManager.Instance.studyUIManager != null)
         {
             studyManager.Instance.studyUIManager.SetUpTechniqueTrainingUI(worldTransitionUIType);
         }

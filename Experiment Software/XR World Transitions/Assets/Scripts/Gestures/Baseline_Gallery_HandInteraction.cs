@@ -24,10 +24,6 @@ public class Baseline_Gallery_HandInteraction : InteractionHandler
         // ProcessUpdate();
     }
 
-    public override void InitInteractionHandler() {
-        // interfaceRef = TransitionUIManager.Instance.CurrentTransitionInterface;        
-    }
-
     public override void HandleActivation()
     {
         // Implementation for handling activation

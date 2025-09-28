@@ -40,9 +40,10 @@ public class WIM_Gallery_BodyPreview_HandInteraction : InteractionHandler
     {
         // ProcessUpdate();
     }
-
-    public override void InitInteractionHandler() {
-        // interfaceRef = TransitionUIManager.Instance.CurrentTransitionInterface;        
+    
+    void OnEnable()
+    {
+        DominantHandActivation = true;
     }
 
     public override void HandleActivation()
@@ -60,84 +61,144 @@ public class WIM_Gallery_BodyPreview_HandInteraction : InteractionHandler
         // Implementation for handling selection
     }
 
-    bool middlePinchGestureDetected;
-    Vector3 tipPosition, basePosition;
-    /// <summary>
-    /// Check for gestures and handle them accordingly. Will not be reached if a gesture is already in progress.
-    /// </summary>
-    public override void CheckForGestures()
+    public override void HandlePinchDetected(Vector3 tipPosition)
     {
-        // handle gesture progress tracking
-        // if (GestureInProgress) return;
-        if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand) {
-            (middlePinchGestureDetected, tipPosition, basePosition) = GestureDetected("L_MiddleThumb_Pinch");
-        } else {
-            (middlePinchGestureDetected, tipPosition, basePosition) = GestureDetected("R_MiddleThumb_Pinch");
+        // if menu is closed, open it.
+        if (CurrentState == GestureState.MenuClose) {
+
+            TransitionToState(GestureState.MenuOpen);
+
+            Vector3 worldmiddleTipPose = XRComponents.Instance.XRRig.transform.TransformPoint(tipPosition);
+
+            HandPositionInLocalSpace = XRComponents.Instance.HeadGazeSphere.transform.InverseTransformPoint(worldmiddleTipPose);
+
+            // set first scroll pass flag because this is a new gesture
+            FirstScrollPass = true; 
+
+            // Reset cursor position when menu is opened.
+            // portalInterface.CursorObject.transform.localPosition = new Vector3(scrollStartX, 0, 0);
+            interfaceRef.CursorObject.transform.localPosition = Vector3.zero;
+
         }
+        // if menu is open, handle user scrolling
+        else if (CurrentState == GestureState.MenuOpen) {
+            HandleUserScrolling(tipPosition);
+        }
+    }
 
-        // middle pinch is detected:
-        if (middlePinchGestureDetected)
-        {
+    public override void HandlePinchNotDetected()
+    {
+        // if menu is open, we detect end of gesture
+        if (CurrentState == GestureState.MenuOpen) {
+            
+            // Debug.Log("Pinch released");
 
-            // if menu is closed, open it.
-            if (CurrentState == GestureState.MenuClose) {
+            FirstScrollPass = true;
 
-                TransitionToState(GestureState.MenuOpen);
+            float handPositionYDiff = HandPositionInLocalSpace.y - GestureStartPositionInLocalSpace.y;
 
-                Vector3 worldmiddleTipPose = XRComponents.Instance.XRRig.transform.TransformPoint(tipPosition);
+            StartCoroutine(SnapToTargetScrollPos());
 
-                HandPositionInLocalSpace = XRComponents.Instance.HeadGazeSphere.transform.InverseTransformPoint(worldmiddleTipPose);
-
-                // set first scroll pass flag because this is a new gesture
-                FirstScrollPass = true; 
-
-                // Reset cursor position when menu is opened.
-                // portalInterface.CursorObject.transform.localPosition = new Vector3(scrollStartX, 0, 0);
-                interfaceRef.CursorObject.transform.localPosition = Vector3.zero;
-
+            // if user releases pinch below threshold, close menu
+            if (handPositionYDiff < -0.1f) {
+                Debug.Log("pinch released below gesture start position. Closing menu.");
+                TransitionToState(GestureState.MenuClose);
+                XRComponents.Instance.InteractionZones.SetActive(false);
             }
-            // if menu is open, handle user scrolling
-            else if (CurrentState == GestureState.MenuOpen) {
-                HandleUserScrolling(tipPosition);
-            }
-            // else if (CurrentState == GestureState.SelectMenuItemForPreview)
-            //     TransitionToState(GestureState.MenuClose);
-        } 
-        // middle Pinch NOT detected:
-        else {
-            // if menu is open, we detect end of gesture
-            if (CurrentState == GestureState.MenuOpen) {
+
+            else if (handPositionYDiff > 0.1f & !TransitionManager.Instance.Transitioning) {
+                Debug.Log("pinch released above gesture start position.");
+                isTransitioning = true;
+
+                HandleConfirmTransitionToPreviewWorld();
+                isTransitioning = false;
                 
-                // Debug.Log("Pinch released");
-
-                FirstScrollPass = true;
-
-                float handPositionYDiff = HandPositionInLocalSpace.y - GestureStartPositionInLocalSpace.y;
-
-                StartCoroutine(SnapToTargetScrollPos());
-
-                // if user releases pinch below threshold, close menu
-                if (handPositionYDiff < -0.1f) {
-                    Debug.Log("pinch released below gesture start position. Closing menu.");
-                    TransitionToState(GestureState.MenuClose);
-                    XRComponents.Instance.InteractionZones.SetActive(false);
-                }
-
-                else if (handPositionYDiff > 0.1f & !TransitionManager.Instance.Transitioning) {
-                    Debug.Log("pinch released above gesture start position.");
-                    isTransitioning = true;
-
-                    HandleConfirmTransitionToPreviewWorld();
-                    isTransitioning = false;
-                    
-                    // StartCoroutine(delayCompleteTransitionToSelectedWorld());
-                    
-                    XRComponents.Instance.InteractionZones.SetActive(false);
-                    // HandleConfirmTransitionToPreviewWorld();
-                }
+                // StartCoroutine(delayCompleteTransitionToSelectedWorld());
+                
+                XRComponents.Instance.InteractionZones.SetActive(false);
+                // HandleConfirmTransitionToPreviewWorld();
             }
         }
     }
+
+    bool middlePinchGestureDetected;
+    Vector3 tipPosition, basePosition;
+    // /// <summary>
+    // /// Check for gestures and handle them accordingly. Will not be reached if a gesture is already in progress.
+    // /// </summary>
+    // public override void CheckForGestures()
+    // {
+    //     // handle gesture progress tracking
+    //     // if (GestureInProgress) return;
+    //     if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand) {
+    //         (middlePinchGestureDetected, tipPosition, basePosition) = GestureDetected("L_MiddleThumb_Pinch");
+    //     } else {
+    //         (middlePinchGestureDetected, tipPosition, basePosition) = GestureDetected("R_MiddleThumb_Pinch");
+    //     }
+
+    //     // middle pinch is detected:
+    //     if (middlePinchGestureDetected)
+    //     {
+
+    //         // if menu is closed, open it.
+    //         if (CurrentState == GestureState.MenuClose) {
+
+    //             TransitionToState(GestureState.MenuOpen);
+
+    //             Vector3 worldmiddleTipPose = XRComponents.Instance.XRRig.transform.TransformPoint(tipPosition);
+
+    //             HandPositionInLocalSpace = XRComponents.Instance.HeadGazeSphere.transform.InverseTransformPoint(worldmiddleTipPose);
+
+    //             // set first scroll pass flag because this is a new gesture
+    //             FirstScrollPass = true; 
+
+    //             // Reset cursor position when menu is opened.
+    //             // portalInterface.CursorObject.transform.localPosition = new Vector3(scrollStartX, 0, 0);
+    //             interfaceRef.CursorObject.transform.localPosition = Vector3.zero;
+
+    //         }
+    //         // if menu is open, handle user scrolling
+    //         else if (CurrentState == GestureState.MenuOpen) {
+    //             HandleUserScrolling(tipPosition);
+    //         }
+    //         // else if (CurrentState == GestureState.SelectMenuItemForPreview)
+    //         //     TransitionToState(GestureState.MenuClose);
+    //     } 
+    //     // middle Pinch NOT detected:
+    //     else {
+    //         // if menu is open, we detect end of gesture
+    //         if (CurrentState == GestureState.MenuOpen) {
+                
+    //             // Debug.Log("Pinch released");
+
+    //             FirstScrollPass = true;
+
+    //             float handPositionYDiff = HandPositionInLocalSpace.y - GestureStartPositionInLocalSpace.y;
+
+    //             StartCoroutine(SnapToTargetScrollPos());
+
+    //             // if user releases pinch below threshold, close menu
+    //             if (handPositionYDiff < -0.1f) {
+    //                 Debug.Log("pinch released below gesture start position. Closing menu.");
+    //                 TransitionToState(GestureState.MenuClose);
+    //                 XRComponents.Instance.InteractionZones.SetActive(false);
+    //             }
+
+    //             else if (handPositionYDiff > 0.1f & !TransitionManager.Instance.Transitioning) {
+    //                 Debug.Log("pinch released above gesture start position.");
+    //                 isTransitioning = true;
+
+    //                 HandleConfirmTransitionToPreviewWorld();
+    //                 isTransitioning = false;
+                    
+    //                 // StartCoroutine(delayCompleteTransitionToSelectedWorld());
+                    
+    //                 XRComponents.Instance.InteractionZones.SetActive(false);
+    //                 // HandleConfirmTransitionToPreviewWorld();
+    //             }
+    //         }
+    //     }
+    // }
 
     private IEnumerator delayCompleteTransitionToSelectedWorld() {
         yield return new WaitForSeconds(0.25f);

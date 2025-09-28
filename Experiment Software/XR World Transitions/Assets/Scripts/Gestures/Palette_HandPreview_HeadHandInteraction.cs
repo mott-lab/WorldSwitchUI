@@ -15,10 +15,10 @@ public class Palette_HandPreview_HeadHandInteraction : InteractionHandler {
     {
         // ProcessUpdate();
     }
-
-    public override void InitInteractionHandler()
+    
+    void OnEnable()
     {
-        
+        DominantHandActivation = true;
     }
 
     public override void HandleActivation()
@@ -36,48 +36,54 @@ public class Palette_HandPreview_HeadHandInteraction : InteractionHandler {
         // Implementation for handling selection
     }
 
-    bool pinchDetected;
-    /// <summary>
-    /// Check for gestures and handle them accordingly. Will not be reached if a gesture is already in progress.
-    /// </summary>
-    public override void CheckForGestures()
+    public override void ActivationGestureDetected()
     {
-        // handle gesture progress tracking
-        if (GestureInProgress) return;
-
-        if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand) {
-            pinchDetected = GestureDetected("L_MiddleThumb_Pinch").Item1;
-        } else {
-            pinchDetected = GestureDetected("R_MiddleThumb_Pinch").Item1;
-        }
-
-        // middle pinch detected
-        if (pinchDetected)
-        {
-            // Debug.Log("Middle finger and thumb are touching.");
-
-            if (CurrentState == GestureState.MenuClose) {
-                TransitionToState(GestureState.MenuOpen);
-                TransitionUIManager.Instance.CurrentTransitionInterface.GetComponent<Palette_Interface>().MiddlePaletteMenuObject.GetComponent<PaletteMenuPreviewObject>().ResetCursor();
-            } 
-        }
-        // middle pinch NOT detected
-        else {
-            // if menu is open, we detect end of gesture
-            if (CurrentState == GestureState.MenuOpen) {
-
-                // if right index finger is hovering over menu item, select it
-                if (TransitionUIManager.Instance.HoveredMenuItem != null) {
-                    
-                    TransitionUserInterface.SelectedWorldTargetMenuItem.ConfirmWorldTargetMenuItem();
-
-                    StartCoroutine(delayConfirmTransitionToPreviewWorld());
-                } else {
-                    TransitionToState(GestureState.MenuClose); 
-                }
-            }
-        }
+        base.ActivationGestureDetected();
+        TransitionUIManager.Instance.CurrentTransitionInterface.GetComponent<Palette_Interface>().MiddlePaletteMenuObject.GetComponent<PaletteMenuPreviewObject>().ResetCursor();
     }
+
+    // bool pinchDetected;
+    // /// <summary>
+    // /// Check for gestures and handle them accordingly. Will not be reached if a gesture is already in progress.
+    // /// </summary>
+    // public override void CheckForGestures()
+    // {
+    //     // handle gesture progress tracking
+    //     if (GestureInProgress) return;
+
+    //     if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand) {
+    //         pinchDetected = GestureDetected("L_MiddleThumb_Pinch").Item1;
+    //     } else {
+    //         pinchDetected = GestureDetected("R_MiddleThumb_Pinch").Item1;
+    //     }
+
+    //     // middle pinch detected
+    //     if (pinchDetected)
+    //     {
+    //         // Debug.Log("Middle finger and thumb are touching.");
+
+    //         if (CurrentState == GestureState.MenuClose) {
+    //             TransitionToState(GestureState.MenuOpen);
+    //             TransitionUIManager.Instance.CurrentTransitionInterface.GetComponent<Palette_Interface>().MiddlePaletteMenuObject.GetComponent<PaletteMenuPreviewObject>().ResetCursor();
+    //         } 
+    //     }
+    //     // middle pinch NOT detected
+    //     else {
+    //         // if menu is open, we detect end of gesture
+    //         if (CurrentState == GestureState.MenuOpen) {
+
+    //             // if right index finger is hovering over menu item, select it
+    //             if (TransitionUIManager.Instance.HoveredMenuItem != null) {
+
+    //                 TransitionUserInterface.SelectedWorldTargetMenuItem.ConfirmWorldTargetMenuItem();
+
+    //                 StartCoroutine(delayConfirmTransitionToPreviewWorld());
+    //             } else {
+    //                 TransitionToState(GestureState.MenuClose); 
+    //             }
+    //         }
+    //     }
+    // }
 
     private IEnumerator delayConfirmTransitionToPreviewWorld()
     {

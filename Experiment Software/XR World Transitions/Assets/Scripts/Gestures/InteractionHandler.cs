@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.XR.Hands;
@@ -66,8 +67,12 @@ public abstract class InteractionHandler : MonoBehaviour
         OnStateEnter(CurrentState);
     }
 
-    public virtual void InitInteractionHandler() {
+    public virtual void InitInteractionHandler()
+    {
         interfaceRef = TransitionUIManager.Instance.CurrentTransitionInterface;
+        CurrentState = GestureState.MenuClose; // Default start state
+        Debug.Log("Starting State: " + CurrentState);
+        OnStateEnter(CurrentState);
     }
 
     public void SetScrollingVariables(float velocityLowerBound, float velocityUpperBound, float multiplierLowerBound, float multiplierUpperBound, float scrollSpeedLowerBound, float handYVelocityUpperBound)
@@ -216,74 +221,98 @@ public abstract class InteractionHandler : MonoBehaviour
     /// </summary>
     /// <param name="dominantHandActivation">True if the dominant hand is used for activation, false otherwise.</param>
     /// <returns>True if the activation gesture is detected, false otherwise.</returns>
-    public bool CheckActivationPinch(bool dominantHandActivation)
+    public (bool, Vector3) CheckActivationPinch(bool dominantHandActivation)
     {
         // handle gesture progress tracking
-        if (GestureInProgress) return false;
+        if (GestureInProgress) return (false, Vector3.zero);
 
         if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand)
         {
             if (dominantHandActivation)
             {
-                return GestureDetected("R_MiddleThumb_Pinch").Item1;
+                return (GestureDetected("R_MiddleThumb_Pinch").Item1, GestureDetected("R_MiddleThumb_Pinch").Item2);
             }
             else
             {
-                return GestureDetected("L_MiddleThumb_Pinch").Item1;
+                return (GestureDetected("L_MiddleThumb_Pinch").Item1, GestureDetected("L_MiddleThumb_Pinch").Item2);
             }
         }
         else
         {
             if (dominantHandActivation)
             {
-                return GestureDetected("L_MiddleThumb_Pinch").Item1;
+                return (GestureDetected("L_MiddleThumb_Pinch").Item1, GestureDetected("L_MiddleThumb_Pinch").Item2);
             }
             else
             {
-                return GestureDetected("R_MiddleThumb_Pinch").Item1;
+                return (GestureDetected("R_MiddleThumb_Pinch").Item1, GestureDetected("R_MiddleThumb_Pinch").Item2);
             }
         }
     }
 
-    public void ActivationGestureDetected()
-    {
-        if (CurrentState == GestureState.MenuClose)
-        {
-            TransitionToState(GestureState.MenuOpen);
-        }
-    }
+    
 
-    public void DeactivationGestureDetected()
-    {
-        // if menu is open, we detect end of gesture
-        if (CurrentState == GestureState.MenuOpen)
-        {
-
-            if (TransitionUIManager.Instance.HoveredMenuItem != null)
-            {
-                TransitionUIManager.Instance.HoveredMenuItem.ConfirmWorldTargetMenuItem();
-            }
-            TransitionToState(GestureState.MenuClose);
-        }
-    }
+    
 
     /// <summary>
     /// Checks for gestures and transitions between states based on the detected gestures.
     /// </summary>
     public void CheckForGestures()
     {
-        bool pinchDetected = CheckActivationPinch(DominantHandActivation);
+        (bool pinchDetected, Vector3 tipPosition) = CheckActivationPinch(DominantHandActivation);
 
         // middle pinch detected
         if (pinchDetected)
         {
-            ActivationGestureDetected();
+            HandlePinchDetected(tipPosition);
         }
         // middle pinch NOT detected
         else
         {
+            HandlePinchNotDetected();
+        }
+    }
+
+    public virtual void HandlePinchDetected(Vector3 tipPosition)
+    {
+        Debug.Log("InteractionHandler: Pinch Detected.");
+        if (CurrentState == GestureState.MenuClose)
+        {
+            ActivationGestureDetected();
+        }
+    }
+
+    public virtual void HandlePinchNotDetected()
+    {
+        if (CurrentState == GestureState.MenuOpen)
+        {
             DeactivationGestureDetected();
         }
+    }
+
+    public virtual void ActivationGestureDetected()
+    {
+        TransitionToState(GestureState.MenuOpen);
+        Debug.Log("InteractionHandler: Activation Gesture Detected.");
+    }
+
+    private IEnumerator delayConfirmTransitionToPreviewWorld()
+    {
+        yield return new WaitForSeconds(0.5f);
+        TransitionToState(GestureState.MenuClose);
+    }
+
+
+    public virtual void DeactivationGestureDetected()
+    {
+        if (TransitionUIManager.Instance.HoveredMenuItem != null)
+        {
+            TransitionUIManager.Instance.HoveredMenuItem.ConfirmWorldTargetMenuItem();
+            // StartCoroutine(delayConfirmTransitionToPreviewWorld());
+        } else {
+            TransitionToState(GestureState.MenuClose); 
+        }
+
     }
 
     public void HandleUserScrolling(Vector3 middleTipPose)
