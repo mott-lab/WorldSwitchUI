@@ -84,6 +84,7 @@ public class DataLogger : MonoBehaviour
     private void Update()
     {
         if (trackingWriter == null) return;
+        if (StudyConfigurationManager.Instance.CurrentOperationMode == StudyConfigurationManager.OperationMode.Demo) return;
 
         // GameObject hmdObject = GameObject.Find("Main Camera");
         // GameObject leftHandRoot = GameObject.Find("LeftHandDebugDrawJoints");
@@ -180,6 +181,8 @@ public class DataLogger : MonoBehaviour
 
     private void WriteLogLine(float timestamp, string coinName, string eventType, float duration)
     {
+        if (StudyConfigurationManager.Instance.CurrentOperationMode == StudyConfigurationManager.OperationMode.Demo) return;
+        
         // Convert duration from seconds to min
         // float durationMinutes = duration / 60f;
         // Get the current system time as a formatted string

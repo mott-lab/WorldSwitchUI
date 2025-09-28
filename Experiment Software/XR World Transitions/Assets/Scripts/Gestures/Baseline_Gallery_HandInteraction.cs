@@ -13,6 +13,11 @@ public class Baseline_Gallery_HandInteraction : InteractionHandler
         
     }
 
+    void OnEnable()
+    {
+        DominantHandActivation = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -38,41 +43,36 @@ public class Baseline_Gallery_HandInteraction : InteractionHandler
         // Implementation for handling selection
     }
 
-    bool pinchDetected;
+    // bool pinchDetected;
     /// <summary>
     /// Check for gestures and handle them accordingly. Will not be reached if a gesture is already in progress.
     /// </summary>
-    public override void CheckForGestures()
-    {
-        // handle gesture progress tracking
-        if (GestureInProgress) return;
+    // public override void CheckForGestures()
+    // {
+    //     // // // handle gesture progress tracking
+    //     // // if (GestureInProgress) return;
 
-        if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand) {
-            pinchDetected = GestureDetected("R_MiddleThumb_Pinch").Item1;
-        } else {
-            pinchDetected = GestureDetected("L_MiddleThumb_Pinch").Item1;
-        }
+    //     // pinchDetected = CheckActivationPinch(true);
 
-        // middle pinch detected
-        if (pinchDetected)
-        {
+    //     // // middle pinch detected
+    //     // if (pinchDetected)
+    //     // {
+    //     //     if (CurrentState == GestureState.MenuClose) {
+    //     //         TransitionToState(GestureState.MenuOpen);
+    //     //     } 
+    //     // }
+    //     // // middle pinch NOT detected
+    //     // else {
+    //     //     // if menu is open, we detect end of gesture
+    //     //     if (CurrentState == GestureState.MenuOpen) {
 
-            if (CurrentState == GestureState.MenuClose) {
-                TransitionToState(GestureState.MenuOpen);
-            } 
-        }
-        // middle pinch NOT detected
-        else {
-            // if menu is open, we detect end of gesture
-            if (CurrentState == GestureState.MenuOpen) {
-
-                if (TransitionUIManager.Instance.HoveredMenuItem != null) {
-                    TransitionUIManager.Instance.HoveredMenuItem.ConfirmWorldTargetMenuItem();
-                }
-                TransitionToState(GestureState.MenuClose); 
-            }
-        }
-    }
+    //     //         if (TransitionUIManager.Instance.HoveredMenuItem != null) {
+    //     //             TransitionUIManager.Instance.HoveredMenuItem.ConfirmWorldTargetMenuItem();
+    //     //         }
+    //     //         TransitionToState(GestureState.MenuClose); 
+    //     //     }
+    //     // }
+    // }
 
 
     public override void HandleSelectMenuItemForPreview()

@@ -27,6 +27,8 @@ public abstract class InteractionHandler : MonoBehaviour
     private Vector3 prevHandPositionInLocalSpace;
     public bool FirstScrollPass;
 
+    public bool DominantHandActivation = true; // if true, dominant hand does activation gesture. if false, non-dominant hand does activation gesture.
+
     [Header("Scrolling Interface Settings")]
     [SerializeField] private float gestureScrollSpeed = 1f;
     [SerializeField] private float velocityLowerBound = 0f;
@@ -47,10 +49,7 @@ public abstract class InteractionHandler : MonoBehaviour
     public abstract void HandleNavigation();
     public abstract void HandleSelection();
 
-    /// <summary>
-    /// Checks for gestures and transitions between states based on the detected gestures.
-    /// </summary>
-    public abstract void CheckForGestures();
+    
 
     public void ProcessUpdate() {
         HandleActivation();
@@ -212,7 +211,83 @@ public abstract class InteractionHandler : MonoBehaviour
         
     }
 
-    public void HandleUserScrolling(Vector3 middleTipPose) {
+    /// <summary>
+    /// Checks for activation gesture based on settings for user's dominant hand and interface's dominant hand setting.
+    /// </summary>
+    /// <param name="dominantHandActivation">True if the dominant hand is used for activation, false otherwise.</param>
+    /// <returns>True if the activation gesture is detected, false otherwise.</returns>
+    public bool CheckActivationPinch(bool dominantHandActivation)
+    {
+        // handle gesture progress tracking
+        if (GestureInProgress) return false;
+
+        if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand)
+        {
+            if (dominantHandActivation)
+            {
+                return GestureDetected("R_MiddleThumb_Pinch").Item1;
+            }
+            else
+            {
+                return GestureDetected("L_MiddleThumb_Pinch").Item1;
+            }
+        }
+        else
+        {
+            if (dominantHandActivation)
+            {
+                return GestureDetected("L_MiddleThumb_Pinch").Item1;
+            }
+            else
+            {
+                return GestureDetected("R_MiddleThumb_Pinch").Item1;
+            }
+        }
+    }
+
+    public void ActivationGestureDetected()
+    {
+        if (CurrentState == GestureState.MenuClose)
+        {
+            TransitionToState(GestureState.MenuOpen);
+        }
+    }
+
+    public void DeactivationGestureDetected()
+    {
+        // if menu is open, we detect end of gesture
+        if (CurrentState == GestureState.MenuOpen)
+        {
+
+            if (TransitionUIManager.Instance.HoveredMenuItem != null)
+            {
+                TransitionUIManager.Instance.HoveredMenuItem.ConfirmWorldTargetMenuItem();
+            }
+            TransitionToState(GestureState.MenuClose);
+        }
+    }
+
+    /// <summary>
+    /// Checks for gestures and transitions between states based on the detected gestures.
+    /// </summary>
+    public void CheckForGestures()
+    {
+        bool pinchDetected = CheckActivationPinch(DominantHandActivation);
+
+        // middle pinch detected
+        if (pinchDetected)
+        {
+            ActivationGestureDetected();
+        }
+        // middle pinch NOT detected
+        else
+        {
+            DeactivationGestureDetected();
+        }
+    }
+
+    public void HandleUserScrolling(Vector3 middleTipPose)
+    {
 
         prevHandPositionInLocalSpace = HandPositionInLocalSpace;
 
@@ -221,7 +296,8 @@ public abstract class InteractionHandler : MonoBehaviour
         HandPositionInLocalSpace = XRComponents.Instance.HeadGazeSphere.transform.InverseTransformPoint(worldmiddleTipPose);
 
         // do another pass if this is the first scroll pass on a new gesture. Otherwise, will compute the difference in hand position between current position, and where the last gesture completed.
-        if (FirstScrollPass) {
+        if (FirstScrollPass)
+        {
             GestureStartPositionInLocalSpace = HandPositionInLocalSpace;
             XRComponents.Instance.InteractionZones.SetActive(true);
             XRComponents.Instance.InteractionZones.transform.localPosition = middleTipPose; // handVisualization and InteractionZones objects are both children of XR Origin
@@ -236,7 +312,8 @@ public abstract class InteractionHandler : MonoBehaviour
         float handYVelocityAbs = Mathf.Abs(handYVelocity);
 
         // if hand moves more up than left/right, do not scroll
-        if (handYVelocityAbs > handXVelocityAbs || handYVelocityAbs > handYVelocityUpperBound){
+        if (handYVelocityAbs > handXVelocityAbs || handYVelocityAbs > handYVelocityUpperBound)
+        {
             return;
         }
 
@@ -252,12 +329,13 @@ public abstract class InteractionHandler : MonoBehaviour
         float diffCursorX = handXVelocity * gestureScrollSpeed * scrollMultiplier;
         float endCursorX = currentCursorX + diffCursorX;
         endCursorX = Mathf.Clamp(endCursorX, scrollStartX, scrollEndX);
-        Vector3 newCursorPos =  new Vector3(endCursorX, 0, 0);
+        Vector3 newCursorPos = new Vector3(endCursorX, 0, 0);
 
         // find nearest snap point, lerp to it
         targetScrollPos = RoundToNearestInterval(endCursorX, scrollInterval, scrollStartX);
         // if hand moves more up than left/right, lerp to nearest snap point
-        if (handXVelocityAbs < scrollSpeedLowerBound){
+        if (handXVelocityAbs < scrollSpeedLowerBound)
+        {
             newCursorPos.x = Mathf.Lerp(endCursorX, targetScrollPos, lerpWeight);
         }
 
