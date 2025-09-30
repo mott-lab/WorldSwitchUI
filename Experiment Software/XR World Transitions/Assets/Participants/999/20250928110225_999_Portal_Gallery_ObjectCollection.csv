@@ -1,0 +1,13 @@
+Timestamp,ParticipantID,TaskType,Technique,TaskBlock,Trial,CoinName,Event,Duration
+4.1961,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+5.6536,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
+15.1409,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+20.1548,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
+28.8010,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+29.7334,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
+72.7051,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+75.2871,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
+143.4010,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+143.5044,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
+157.7724,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+158.7459,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,

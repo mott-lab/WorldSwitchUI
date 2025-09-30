@@ -1,0 +1,10 @@
+Timestamp,ParticipantID,TaskType,Technique,TaskBlock,Trial,CoinName,Event,Duration
+2.1892,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+2.9000,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Castle,
+3.4024,999,ObjectCollection,Portal_Palette_Hand,0,1,,Confirm_Transition,World Target (Castle),
+3.9260,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
+4.1924,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+4.3400,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Castle,
+4.6600,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Home,
+5.0426,999,ObjectCollection,Portal_Palette_Hand,0,1,,Confirm_Transition,World Target (Home),
+6.7227,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,

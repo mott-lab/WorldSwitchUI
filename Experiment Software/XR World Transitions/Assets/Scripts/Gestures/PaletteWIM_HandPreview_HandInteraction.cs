@@ -41,50 +41,6 @@ public class PaletteWIM_HandPreview_HandInteraction : InteractionHandler
         base.ActivationGestureDetected();
         TransitionUIManager.Instance.CurrentTransitionInterface.GetComponent<Palette_Interface>().MiddlePaletteMenuObject.GetComponent<PaletteMenuPreviewObject>().ResetCursor();
     }
-
-    // bool pinchDetected;
-    // /// <summary>
-    // /// Check for gestures and handle them accordingly. Will not be reached if a gesture is already in progress.
-    // /// </summary>
-    // public override void CheckForGestures()
-    // {
-
-    //     if (GestureInProgress) return;
-
-    //     if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand) {
-    //         pinchDetected = GestureDetected("L_MiddleThumb_Pinch").Item1;
-    //     } else {
-    //         pinchDetected = GestureDetected("R_MiddleThumb_Pinch").Item1;
-    //     }
-
-    //     // middle pinch detected
-    //     if (pinchDetected)
-    //     {
-    //         // Debug.Log("Middle finger and thumb are touching.");
-
-    //         if (CurrentState == GestureState.MenuClose) {
-    //             TransitionToState(GestureState.MenuOpen);
-    //             // TransitionUIManager.Instance.CurrentTransitionInterface.GetComponent<Palette_Interface>().MiddlePaletteMenuObject.GetComponent<PaletteMenuPreviewObject>().ResetCursor();
-    //         } 
-    //     }
-    //     // middle pinch NOT detected
-    //     else {
-    //         // if menu is open, we detect end of gesture
-    //         if (CurrentState == GestureState.MenuOpen) {
-
-    //             // if right index finger is hovering over menu item, select it
-    //             if (TransitionUIManager.Instance.HoveredMenuItem != null) {
-
-    //                 TransitionUserInterface.SelectedWorldTargetMenuItem.ConfirmWorldTargetMenuItem();
-
-    //                 StartCoroutine(delayConfirmTransitionToPreviewWorld());
-    //             } else {
-    //                 TransitionToState(GestureState.MenuClose); 
-    //             }
-    //         }
-    //     }
-    // }
-
     private IEnumerator delayConfirmTransitionToPreviewWorld()
     {
         yield return new WaitForSeconds(0.5f);

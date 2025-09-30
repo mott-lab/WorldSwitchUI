@@ -162,8 +162,9 @@ public class TransitionManager : MonoBehaviour
             SetLayerRecursively(studyManager.Instance.chest.gameObject, LayerMask.NameToLayer("Default"));
             SetLayerRecursively(XRComponents.Instance.StudyUIParent, LayerMask.NameToLayer("Default"));
             SetLayerRecursively(studyManager.Instance.trialBlockStartItem.item, LayerMask.NameToLayer("Default"));
-            studyManager.Instance.GetComponent<XRInteractorSetup>().EnableRightNearFarInteractor(true);
-            studyManager.Instance.GetComponent<XRInteractorSetup>().EnableLeftNearFarInteractor(true);
+
+            TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.EnableRightNearFarInteractor(true);
+            TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.EnableLeftNearFarInteractor(true);
 
             // TODO: idea: turn off the coin anchor in the Home env. turn it on when the task starts.
             if (!studyManager.Instance.GetComponent<StudyConfigurationManager>().TechniqueTrainingComplete)

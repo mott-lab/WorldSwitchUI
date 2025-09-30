@@ -1,0 +1,6 @@
+Timestamp,ParticipantID,TaskType,Technique,TaskBlock,Trial,CoinName,Event,Duration
+0.3443,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
+3.1437,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+3.2116,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
+6.0928,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+8.2400,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Snowy,

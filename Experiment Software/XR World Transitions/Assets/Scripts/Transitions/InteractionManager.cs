@@ -15,6 +15,8 @@ public class TransitionInteraction {
 
 public class InteractionManager : MonoBehaviour {
 
+    [SerializeField] private XRInteractorSetup xrInteractorSetup;
+    public XRInteractorSetup XRInteractorSetup { get => xrInteractorSetup; }
     [SerializeField] private List<InteractionHandler> transitionInteractions;
     public List<InteractionHandler> TransitionInteractions { get => transitionInteractions; }
     public InteractionHandler SelectedTransitionInteraction;
@@ -56,48 +58,50 @@ public class InteractionManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (!handFound_L)
-        {
-            XRComponents.Instance.leftHandObject = GameObject.Find("LeftHand");
-            XRComponents.Instance.wristL = GameObject.Find("L_Wrist");
-            if (XRComponents.Instance.leftHandObject != null)
+        if (xrInteractorSetup.CurrentInteractionMode == XRInteractorSetup.InteractionMode.Hands) {
+            if (!handFound_L)
             {
-                handFound_L = true;
-                Debug.Log("Found LeftHand GameObject");
+                XRComponents.Instance.leftHandObject = GameObject.Find("LeftHand");
+                XRComponents.Instance.wristL = GameObject.Find("L_Wrist");
+                if (XRComponents.Instance.leftHandObject != null)
+                {
+                    handFound_L = true;
+                    Debug.Log("Found LeftHand GameObject");
+                }
+                return;
             }
-            return;
-        }
-        else
-        {
-
-        }
-
-        if (!handFound_R)
-        {
-            XRComponents.Instance.rightHandObject = GameObject.Find("RightHand");
-            XRComponents.Instance.wristR = GameObject.Find("R_Wrist");
-            if (XRComponents.Instance.rightHandObject != null)
+            else
             {
-                handFound_R = true;
-                Debug.Log("Found RightHand GameObject");
+
             }
-            return;
-        }
-        else
-        {
+
+            if (!handFound_R)
+            {
+                XRComponents.Instance.rightHandObject = GameObject.Find("RightHand");
+                XRComponents.Instance.wristR = GameObject.Find("R_Wrist");
+                if (XRComponents.Instance.rightHandObject != null)
+                {
+                    handFound_R = true;
+                    Debug.Log("Found RightHand GameObject");
+                }
+                return;
+            }
+            else
+            {
+
+            }
+
+            if (XRComponents.Instance.handSubsystem == null || !XRComponents.Instance.handSubsystem.running || (!XRComponents.Instance.leftHandObject.activeInHierarchy & !XRComponents.Instance.rightHandObject.activeInHierarchy)) return;
+
+            XRComponents.Instance.leftHand = XRComponents.Instance.handSubsystem.leftHand;
+            XRComponents.Instance.rightHand = XRComponents.Instance.handSubsystem.rightHand;
+
+            if (!XRComponents.Instance.leftHand.isTracked & !XRComponents.Instance.rightHand.isTracked) return;
+
+            HandsAlive = true;
 
         }
 
-        if (XRComponents.Instance.handSubsystem == null || !XRComponents.Instance.handSubsystem.running || (!XRComponents.Instance.leftHandObject.activeInHierarchy & !XRComponents.Instance.rightHandObject.activeInHierarchy)) return;
-
-        XRComponents.Instance.leftHand = XRComponents.Instance.handSubsystem.leftHand;
-        XRComponents.Instance.rightHand = XRComponents.Instance.handSubsystem.rightHand;
-
-        if (!XRComponents.Instance.leftHand.isTracked & !XRComponents.Instance.rightHand.isTracked) return;
-
-        HandsAlive = true;
-
-        // TransitionUIManager.Instance.InteractionManager.SelectedTransitionUIInteraction.InteractionHandler.ProcessUpdate();
         TransitionUIManager.Instance.InteractionManager.SelectedTransitionInteraction.ProcessUpdate();
     }
 

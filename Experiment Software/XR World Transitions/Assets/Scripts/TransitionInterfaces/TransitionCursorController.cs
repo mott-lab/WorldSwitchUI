@@ -31,8 +31,9 @@ public class TransitionCursorController : MonoBehaviour
         }
 
         // For HeadHandInteraction
-        if (TransitionUIManager.Instance.InteractionManager.SelectedTransitionInteraction is Palette_HandPreview_HeadHandInteraction || 
-                TransitionUIManager.Instance.InteractionManager.SelectedTransitionInteraction is PaletteWIM_HandPreview_HeadHandInteraction) {
+        if (TransitionUIManager.Instance.InteractionManager.SelectedTransitionInteraction is Palette_HandPreview_HeadHandInteraction ||
+                TransitionUIManager.Instance.InteractionManager.SelectedTransitionInteraction is PaletteWIM_HandPreview_HeadHandInteraction)
+        {
 
             Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
             RaycastHit hit;
@@ -54,14 +55,28 @@ public class TransitionCursorController : MonoBehaviour
         {
             if (TransitionUIManager.Instance.InteractionManager.HandsAlive)
             {
-                if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand) {
+                if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand)
+                {
                     XRComponents.Instance.leftHand.GetJoint(XRHandJointID.IndexTip).TryGetPose(out var tipPose);
                     transitionCursorController.transform.localPosition = tipPose.position;
-                } else {
+                }
+                else
+                {
                     XRComponents.Instance.rightHand.GetJoint(XRHandJointID.IndexTip).TryGetPose(out var tipPose);
                     transitionCursorController.transform.localPosition = tipPose.position;
                 }
 
+            }
+            
+            if (TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode == XRInteractorSetup.InteractionMode.Controllers) {
+                if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand)
+                {
+                    transitionCursorController.transform.position = XRComponents.Instance.LeftController.transform.position;
+                }
+                else
+                {
+                    transitionCursorController.transform.position = XRComponents.Instance.RightController.transform.position;
+                }
             }
         }
 

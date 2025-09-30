@@ -39,37 +39,6 @@ public class Baseline_Gallery_HandInteraction : InteractionHandler
         // Implementation for handling selection
     }
 
-    // bool pinchDetected;
-    /// <summary>
-    /// Check for gestures and handle them accordingly. Will not be reached if a gesture is already in progress.
-    /// </summary>
-    // public override void CheckForGestures()
-    // {
-    //     // // // handle gesture progress tracking
-    //     // // if (GestureInProgress) return;
-
-    //     // pinchDetected = CheckActivationPinch(true);
-
-    //     // // middle pinch detected
-    //     // if (pinchDetected)
-    //     // {
-    //     //     if (CurrentState == GestureState.MenuClose) {
-    //     //         TransitionToState(GestureState.MenuOpen);
-    //     //     } 
-    //     // }
-    //     // // middle pinch NOT detected
-    //     // else {
-    //     //     // if menu is open, we detect end of gesture
-    //     //     if (CurrentState == GestureState.MenuOpen) {
-
-    //     //         if (TransitionUIManager.Instance.HoveredMenuItem != null) {
-    //     //             TransitionUIManager.Instance.HoveredMenuItem.ConfirmWorldTargetMenuItem();
-    //     //         }
-    //     //         TransitionToState(GestureState.MenuClose); 
-    //     //     }
-    //     // }
-    // }
-
 
     public override void HandleSelectMenuItemForPreview()
     {

@@ -47,8 +47,8 @@ public class XRComponents : MonoBehaviour
     public GameObject XRRig => xrRig;
     [SerializeField] private Camera xrCamera;
     public Camera XRCamera => xrCamera;
-    public GameObject LeftController => leftController;
     [SerializeField] private GameObject leftController;
+    public GameObject LeftController => leftController;
     [SerializeField] private GameObject rightController;
     public GameObject RightController => rightController;
     [SerializeField] private GameObject headGazeSphere;

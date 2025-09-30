@@ -1,0 +1,11 @@
+Timestamp,ParticipantID,TaskType,Technique,TaskBlock,Trial,CoinName,Event,Duration
+10.3297,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+13.5800,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Funland,
+14.2995,999,ObjectCollection,Portal_Palette_Hand,0,1,,Confirm_Transition,World Target (Funland),
+14.7996,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
+15.0499,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
+15.3000,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Funland,
+16.2200,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Home,
+16.7400,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Home,
+17.9749,999,ObjectCollection,Portal_Palette_Hand,0,1,,Confirm_Transition,World Target (Home),
+18.4779,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,

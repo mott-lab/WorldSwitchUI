@@ -50,13 +50,14 @@ public abstract class InteractionHandler : MonoBehaviour
     public abstract void HandleNavigation();
     public abstract void HandleSelection();
 
-    
 
-    public void ProcessUpdate() {
+
+    public void ProcessUpdate()
+    {
         HandleActivation();
         HandleNavigation();
         HandleSelection();
-
+ 
         CheckForGestures();
     }
 
@@ -250,8 +251,120 @@ public abstract class InteractionHandler : MonoBehaviour
         }
     }
 
-    
 
+    // public void ControllerButtonPressed(bool isRightController, Vector3 controllerPosition)
+    // {
+    //     if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand)
+    //     {
+    //         if (isRightController)
+    //         {
+    //             HandlePinchDetected(controllerPosition);
+    //         }
+    //     }
+    //     else if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand)
+    //     {
+    //         if (!isRightController)
+    //         {
+    //             HandlePinchDetected(controllerPosition);
+    //         }
+    //     }
+    // }
+
+    // public void ControllerButtonReleased(bool isRightController)
+    // {
+    //     if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand)
+    //     {
+    //         if (isRightController)
+    //         {
+    //             HandlePinchNotDetected();
+    //         }
+    //     }
+    //     else if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand)
+    //     {
+    //         if (!isRightController)
+    //         {
+    //             HandlePinchNotDetected();
+    //         }
+    //     }
+    // }
+
+    private bool primaryButtonPressed;
+    Transform activeControllerTransform;
+
+    public void ControllerButtonPressed(bool isRightController)
+    {
+        Debug.Log($"ControllerButtonPressed: isRightController={isRightController}");
+
+        bool activationButtonPressed = false;
+
+        if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand &&
+            isRightController &&
+            DominantHandActivation == true)
+        {
+            activationButtonPressed = true;
+        }
+        else if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand &&
+            !isRightController &&
+            DominantHandActivation == true)
+        {
+            activationButtonPressed = true;
+        }
+        else if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand &&
+            !isRightController &&
+            DominantHandActivation == false)
+        {
+            activationButtonPressed = true;
+        }
+        else if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand &&
+            isRightController &&
+            DominantHandActivation == false)
+        {
+            activationButtonPressed = true;
+        }
+        
+        if (activationButtonPressed)
+        {
+            primaryButtonPressed = true;
+            this.activeControllerTransform = isRightController ? XRComponents.Instance.RightController.transform : XRComponents.Instance.LeftController.transform;
+        }
+    }
+
+    public void ControllerButtonReleased(bool isRightController)
+    {
+        Debug.Log($"ControllerButtonReleased: isRightController={isRightController}");
+        bool activationButtonReleased = false;
+
+        if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand &&
+            isRightController &&
+            DominantHandActivation == true)
+        {
+            activationButtonReleased = true;
+        }
+        else if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand &&
+            !isRightController &&
+            DominantHandActivation == true)
+        {
+            activationButtonReleased = true;
+        }
+        else if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand &&
+            !isRightController &&
+            DominantHandActivation == false)
+        {
+            activationButtonReleased = true;
+        }
+        else if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand &&
+            isRightController &&
+            DominantHandActivation == false)
+        {
+            activationButtonReleased = true;
+        }
+        
+        if (activationButtonReleased)
+        {
+            primaryButtonPressed = false;
+            // this.activeControllerTransform = XRComponents.Instance.RightController.transform;
+        }
+    }
     
 
     /// <summary>
@@ -259,7 +372,20 @@ public abstract class InteractionHandler : MonoBehaviour
     /// </summary>
     public void CheckForGestures()
     {
-        (bool pinchDetected, Vector3 tipPosition) = CheckActivationPinch(DominantHandActivation);
+        bool pinchDetected;
+        Vector3 tipPosition;
+        // Debug.Log($"[InteractionHandler] CheckForGestures called.");
+        // if hands mode, check for pinch gesture
+        if (TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode == XRInteractorSetup.InteractionMode.Hands)
+        {
+            (pinchDetected, tipPosition) = CheckActivationPinch(DominantHandActivation);
+        }
+        // if controller mode, check for controller button press
+        else
+        {
+            (pinchDetected, tipPosition) = (primaryButtonPressed, activeControllerTransform != null ? activeControllerTransform.position : Vector3.zero);
+            // Debug.Log($"[InteractionHandler] Controller mode: pinchDetected={pinchDetected}, tipPosition={tipPosition}");
+        }
 
         // middle pinch detected
         if (pinchDetected)
@@ -275,7 +401,7 @@ public abstract class InteractionHandler : MonoBehaviour
 
     public virtual void HandlePinchDetected(Vector3 tipPosition)
     {
-        Debug.Log("InteractionHandler: Pinch Detected.");
+        // Debug.Log("InteractionHandler: Pinch Detected.");
         if (CurrentState == GestureState.MenuClose)
         {
             ActivationGestureDetected();
@@ -293,7 +419,7 @@ public abstract class InteractionHandler : MonoBehaviour
     public virtual void ActivationGestureDetected()
     {
         TransitionToState(GestureState.MenuOpen);
-        Debug.Log("InteractionHandler: Activation Gesture Detected.");
+        // Debug.Log("InteractionHandler: Activation Gesture Detected.");
     }
 
     private IEnumerator delayConfirmTransitionToPreviewWorld()
