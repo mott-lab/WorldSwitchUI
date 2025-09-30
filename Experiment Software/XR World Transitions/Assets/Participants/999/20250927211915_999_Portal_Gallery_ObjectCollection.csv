@@ -1,6 +1,0 @@
-Timestamp,ParticipantID,TaskType,Technique,TaskBlock,Trial,CoinName,Event,Duration
-116.3230,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
-131.6400,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Castle,
-131.6478,999,ObjectCollection,Portal_Palette_Hand,0,1,,Confirm_Transition,World Target (Castle),
-132.1491,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
-132.8735,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,

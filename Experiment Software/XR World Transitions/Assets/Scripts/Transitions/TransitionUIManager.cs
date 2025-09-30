@@ -113,6 +113,14 @@ public class TransitionUIManager : MonoBehaviour
 
         // Add your logic here to handle the change in worldTransitionUIType
         Debug.Log("worldTransitionUIType has been changed to: " + worldTransitionUIType);
+        if (worldTransitionUIType != TransitionUIType.Portal_Palette_Hand && worldTransitionUIType != TransitionUIType.Portal_Palette_HeadHand && worldTransitionUIType != TransitionUIType.WIM_Palette_Hand && worldTransitionUIType != TransitionUIType.WIM_Palette_HeadHand)
+        {
+            TransitionCursorController.gameObject.SetActive(false);
+        }
+        else
+        {
+            TransitionCursorController.gameObject.SetActive(true);
+        }
         switch (worldTransitionUIType)
         {
             case TransitionUIType.None:

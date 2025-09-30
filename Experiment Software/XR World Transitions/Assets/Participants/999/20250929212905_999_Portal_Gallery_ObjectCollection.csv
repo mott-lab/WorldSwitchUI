@@ -1,7 +1,0 @@
-Timestamp,ParticipantID,TaskType,Technique,TaskBlock,Trial,CoinName,Event,Duration
-43.8609,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
-45.2200,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Snowy,
-45.6400,999,ObjectCollection,Portal_Palette_Hand,0,1,,SelectedMenuItem,Funland,
-46.5282,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
-46.9442,999,ObjectCollection,Portal_Palette_Hand,0,1,,Enable_Interface,,
-47.1680,999,ObjectCollection,Portal_Palette_Hand,0,1,,Disable_Interface,,
