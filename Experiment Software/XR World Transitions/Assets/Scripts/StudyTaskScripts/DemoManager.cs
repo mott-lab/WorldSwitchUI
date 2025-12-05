@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,6 +61,24 @@ public class DemoManager : MonoBehaviour
         selectedPreviewPattern = "NONE";
         selectedInteractionPattern = "NONE";
         XRComponents.Instance.XRRig.transform.eulerAngles = new Vector3(0, 90, 0);
+
+        // TransitionManager.Instance.SetLayerRecursively(studyManager.Instance.chest.gameObject, LayerMask.NameToLayer("PortalOutside"));
+        // TransitionManager.Instance.SetLayerRecursively(XRComponents.Instance.StudyUIParent, LayerMask.NameToLayer("PortalOutside"));
+
+        // Crude: wait for a few seconds to let things set up, then start the scene
+        StartCoroutine(SetUpDemo());
+    }
+
+    private IEnumerator SetUpDemo()
+    {
+        yield return new WaitForSeconds(5f);
+        TransitionManager.Instance.SetLayerRecursively(studyManager.Instance.chest.gameObject, LayerMask.NameToLayer("PortalOutside"));
+        TransitionUIManager.Instance.gameObject.SetActive(true);
+        studyManager.Instance.StartTrialBlock();
+        XRComponents.Instance.StudyUIParent.SetActive(true);
+        TransitionManager.Instance.SetLayerRecursively(XRComponents.Instance.StudyUIParent, LayerMask.NameToLayer("Default"));
+        TransitionManager.Instance.SetLayerRecursively(XRComponents.Instance.DemoUIParent, LayerMask.NameToLayer("UI"));
+        studyManager.Instance.TurnOffTrialBlockStartItem();
     }
 
     public void SelectBaseline()

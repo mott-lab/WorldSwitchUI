@@ -65,7 +65,23 @@ public class TransitionUIManager : MonoBehaviour
 
     public TransitionCursorController TransitionCursorController;
     public GameObject WheelCursor;
-    public WorldTargetMenuItem HoveredMenuItem;
+    [SerializeField] private WorldTargetMenuItem hoveredMenuItem;
+    public WorldTargetMenuItem HoveredMenuItem
+    {
+        get => hoveredMenuItem;
+        set
+        {
+            hoveredMenuItem = value;
+            if (value != null)
+            {
+                LastHoveredMenuItem = value;
+                LastHoverTime = Time.time;
+            }
+        }
+    }
+
+    public WorldTargetMenuItem LastHoveredMenuItem;
+    public float LastHoverTime;
 
     public GameObject WIMObjects;
 

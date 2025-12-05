@@ -251,43 +251,6 @@ public abstract class InteractionHandler : MonoBehaviour
         }
     }
 
-
-    // public void ControllerButtonPressed(bool isRightController, Vector3 controllerPosition)
-    // {
-    //     if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand)
-    //     {
-    //         if (isRightController)
-    //         {
-    //             HandlePinchDetected(controllerPosition);
-    //         }
-    //     }
-    //     else if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand)
-    //     {
-    //         if (!isRightController)
-    //         {
-    //             HandlePinchDetected(controllerPosition);
-    //         }
-    //     }
-    // }
-
-    // public void ControllerButtonReleased(bool isRightController)
-    // {
-    //     if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand)
-    //     {
-    //         if (isRightController)
-    //         {
-    //             HandlePinchNotDetected();
-    //         }
-    //     }
-    //     else if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.LeftHand)
-    //     {
-    //         if (!isRightController)
-    //         {
-    //             HandlePinchNotDetected();
-    //         }
-    //     }
-    // }
-
     private bool primaryButtonPressed;
     Transform activeControllerTransform;
 
@@ -435,8 +398,15 @@ public abstract class InteractionHandler : MonoBehaviour
         {
             TransitionUIManager.Instance.HoveredMenuItem.ConfirmWorldTargetMenuItem();
             // StartCoroutine(delayConfirmTransitionToPreviewWorld());
-        } else {
-            TransitionToState(GestureState.MenuClose); 
+        }
+        else if (TransitionUIManager.Instance.LastHoveredMenuItem != null &
+                (Time.time - TransitionUIManager.Instance.LastHoverTime < 0.4f))
+        {
+            TransitionUIManager.Instance.LastHoveredMenuItem.ConfirmWorldTargetMenuItem();        
+        }
+        else
+        {
+            TransitionToState(GestureState.MenuClose);
         }
 
     }

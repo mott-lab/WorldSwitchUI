@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+// using VERA;
 
 public class DataLogger : MonoBehaviour
 {
@@ -84,7 +85,7 @@ public class DataLogger : MonoBehaviour
     private void Update()
     {
         if (trackingWriter == null) return;
-        if (StudyConfigurationManager.Instance.CurrentOperationMode == StudyConfigurationManager.OperationMode.Demo) return;
+        // if (StudyConfigurationManager.Instance.CurrentOperationMode == StudyConfigurationManager.OperationMode.Demo) return;
 
         // GameObject hmdObject = GameObject.Find("Main Camera");
         // GameObject leftHandRoot = GameObject.Find("LeftHandDebugDrawJoints");
@@ -101,12 +102,22 @@ public class DataLogger : MonoBehaviour
         // string currentTimeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
         string currentTimeStamp = Time.time.ToString("F4");
         string hmdData = GetTransformData(hmdObject?.transform);
-        string leftHandData = GetTransformData(leftWrist);
-        string rightHandData = GetTransformData(rightWrist);
+        string leftHandData = "";
+        string rightHandData = "";
+        if (TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode == XRInteractorSetup.InteractionMode.Hands)
+        {
+            leftHandData = GetTransformData(leftWrist);
+            rightHandData = GetTransformData(rightWrist);
+        }
+        else
+        {
+            leftHandData = GetTransformData(XRComponents.Instance.LeftController.transform);
+            rightHandData = GetTransformData(XRComponents.Instance.RightController.transform);
+        }
 
         // Format the tracking log line
-        string trackingLogLine = string.Format("{0},{1},{2},{3}",
-                                                currentTimeStamp, hmdData, leftHandData, rightHandData);
+        string trackingLogLine = string.Format("{0},{1},{2},{3},{4}",
+                                                currentTimeStamp, hmdData, leftHandData, rightHandData, TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode);
 
         trackingWriter.WriteLine(trackingLogLine);
         trackingWriter.Flush();
@@ -160,7 +171,7 @@ public class DataLogger : MonoBehaviour
         string finalTrackingFilePath = Path.Combine(folderPath, finalTrackingFileName);
 
         trackingWriter = new StreamWriter(finalTrackingFilePath, false);
-        trackingWriter.WriteLine("Timestamp,HMD_PosX,HMD_PosY,HMD_PosZ,HMD_RotX,HMD_RotY,HMD_RotZ,HMD_RotW,LeftHand_PosX,LeftHand_PosY,LeftHand_PosZ,LeftHand_RotX,LeftHand_RotY,LeftHand_RotZ,LeftHand_RotW,RightHand_PosX,RightHand_PosY,RightHand_PosZ,RightHand_RotX,RightHand_RotY,RightHand_RotZ,RightHand_RotW");
+        trackingWriter.WriteLine("Timestamp,HMD_PosX,HMD_PosY,HMD_PosZ,HMD_RotX,HMD_RotY,HMD_RotZ,HMD_RotW,LeftHand_PosX,LeftHand_PosY,LeftHand_PosZ,LeftHand_RotX,LeftHand_RotY,LeftHand_RotZ,LeftHand_RotW,RightHand_PosX,RightHand_PosY,RightHand_PosZ,RightHand_RotX,RightHand_RotY,RightHand_RotZ,RightHand_RotW,CurrentInteractionMode");
         trackingWriter.Flush();
 
         // ----------------- Interaction Data -----------------
@@ -171,7 +182,7 @@ public class DataLogger : MonoBehaviour
         finalInteractionFilePath = Path.Combine(folderPath, finalInteractionFilePath);
 
         interactionWriter = new StreamWriter(finalInteractionFilePath, false);
-        interactionWriter.WriteLine("Timestamp,ParticipantID,TaskType,Technique,Trial,Event");
+        interactionWriter.WriteLine("Timestamp,ParticipantID,TaskType,Technique,Trial,Event,CurrentInteractionMode");
         interactionWriter.Flush();
 
         Debug.Log($"DataLogger initialized. Logging experiment data to: {filePath}");
@@ -181,7 +192,7 @@ public class DataLogger : MonoBehaviour
 
     private void WriteLogLine(float timestamp, string coinName, string eventType, float duration)
     {
-        if (StudyConfigurationManager.Instance.CurrentOperationMode == StudyConfigurationManager.OperationMode.Demo) return;
+        // if (StudyConfigurationManager.Instance.CurrentOperationMode == StudyConfigurationManager.OperationMode.Demo) return;
         
         // Convert duration from seconds to min
         // float durationMinutes = duration / 60f;
@@ -194,8 +205,8 @@ public class DataLogger : MonoBehaviour
             trialIndex = studyManager.Instance.currentTrial; 
         }
 
-        string logLine = string.Format("{0:F4},{1},{2},{3},{4},{5},{6},{7},{8:F2}",
-                            timestamp, participantID, taskType, studyManager.Instance.currentTechnique, studyManager.Instance.CurrentBlock, trialIndex + 1, coinName, eventType, duration);
+        string logLine = string.Format("{0:F4},{1},{2},{3},{4},{5},{6},{7},{8:F2},{9}",
+                            timestamp, participantID, taskType, TransitionUIManager.Instance.WorldTransitionUIType, studyManager.Instance.CurrentBlock, trialIndex + 1, coinName, eventType, duration, TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode);
         writer.WriteLine(logLine);
         writer.Flush();
         Debug.Log("Logged: " + logLine);
@@ -211,13 +222,24 @@ public class DataLogger : MonoBehaviour
         }
 
         // Format: Timestamp,ParticipantID,TaskType,Technique,Trial,CoinName,Event,Duration
-        string logLine = string.Format("{0:F4},{1},{2},{3},{4},{5},{6},{7},{8},{9}",
-                            timestamp, participantID, taskType, studyManager.Instance.currentTechnique, studyManager.Instance.CurrentBlock, trialIndex + 1, "", eventType, field1, "");
+        string logLine = string.Format("{0:F4},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}",
+                            timestamp, participantID, taskType, TransitionUIManager.Instance.WorldTransitionUIType, studyManager.Instance.CurrentBlock, trialIndex + 1, "", eventType, field1, "", TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode);
         // interactionWriter.WriteLine(logLine);
         // interactionWriter.Flush();
         writer.WriteLine(logLine);
         writer.Flush();
         Debug.Log("Logged: " + logLine);
+
+        int eventInt = 0;
+        if (!string.IsNullOrEmpty(eventType))
+        {
+            foreach (char c in eventType)
+            {
+                eventInt += (int)c;
+            }
+        }
+
+        // VERAFile_InteractionLog.CreateCsvEntry(eventInt, field1);
     }
 
     public void LogInteraction(string eventType, string field1)

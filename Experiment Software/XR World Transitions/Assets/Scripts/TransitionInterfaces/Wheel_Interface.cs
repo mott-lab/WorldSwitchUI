@@ -40,12 +40,14 @@ public class Wheel_Interface : TransitionInterface
         }
 
         float forwardMultiplier = 0.15f;
+        float upMultiplier = 0.15f;
         if (TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode == XRInteractorSetup.InteractionMode.Controllers)
         {
             forwardMultiplier = 0f;
+            upMultiplier = 0f;
         }
         Vector3 targetPosition = midPointBetweenHands + 
-                (Vector3.up * 0.15f) + 
+                (Vector3.up * upMultiplier) + 
                 (XRComponents.Instance.XRCamera.transform.forward * forwardMultiplier);
 
         // Move the whole interface toward the target position smoothly
