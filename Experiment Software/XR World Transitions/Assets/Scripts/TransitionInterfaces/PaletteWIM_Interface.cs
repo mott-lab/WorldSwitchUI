@@ -23,19 +23,44 @@ public class PaletteWIM_Interface : TransitionInterface
 
     private void positionInterface() {
 
-        if (XRComponents.Instance.wristL == null) return;
+        
         // Move the interface toward the left hand smoothly
         Vector3 targetPosition;
         GameObject activeHand;
 
-        if (positionPaletteOnRightHand) {
-            activeHand = XRComponents.Instance.wristR;
-            PaletteObjectsParent.transform.localPosition = new Vector3(-0.216f, -0.247f, 0.2f);
-            PaletteObjectsParent.transform.localEulerAngles = new Vector3(10f, 32f, 90f);
-        } else {
-            activeHand = XRComponents.Instance.wristL;
-            PaletteObjectsParent.transform.localPosition = new Vector3(0.216f, -0.247f, 0.2f);
-            PaletteObjectsParent.transform.localEulerAngles = new Vector3(10f, -32f, -90f);
+        if (positionPaletteOnRightHand)
+        {
+            if (TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode == XRInteractorSetup.InteractionMode.Hands)
+            {
+                if (XRComponents.Instance.wristR == null) return;
+                activeHand = XRComponents.Instance.wristR;
+                PaletteObjectsParent.transform.localPosition = new Vector3(-0.216f, -0.247f, 0.2f);
+                PaletteObjectsParent.transform.localEulerAngles = new Vector3(10f, 32f, 90f);
+            }
+            else
+            {
+                activeHand = XRComponents.Instance.RightController;
+                PaletteObjectsParent.transform.localPosition = new Vector3(-0.2782f, -.0095f, -0.0045f);
+                PaletteObjectsParent.transform.localEulerAngles = new Vector3(-5.387f, 10f, 34f);
+            }
+            
+        }
+        else
+        {
+            if (TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode == XRInteractorSetup.InteractionMode.Hands)
+            {
+                if (XRComponents.Instance.wristL == null) return;
+                activeHand = XRComponents.Instance.wristL;
+                PaletteObjectsParent.transform.localPosition = new Vector3(0.216f, -0.247f, 0.2f);
+                PaletteObjectsParent.transform.localEulerAngles = new Vector3(10f, -32f, -90f);
+            }
+            else
+            {
+                activeHand = XRComponents.Instance.LeftController;
+                PaletteObjectsParent.transform.localPosition = new Vector3(0.2782f, -.0095f, -0.0045f);
+                PaletteObjectsParent.transform.localEulerAngles = new Vector3(-5.387f, -10f, -34f);
+            }
+            
         }
 
         targetPosition = activeHand.transform.position;

@@ -33,6 +33,9 @@ public class XRInteractorSetup : MonoBehaviour
     private Transform pinchGrabPose;
     public NearFarInteractor RightNearFarInteractor;
 
+    public enum InteractionMode { Hands, Controllers }
+    public InteractionMode CurrentInteractionMode = InteractionMode.Controllers;
+
     private void Start()
     {
         // Find the studyManager to get the current task type.
@@ -73,16 +76,24 @@ public class XRInteractorSetup : MonoBehaviour
         }
     }
 
+    public void SetControllerInteractionMode(bool controllers)
+    {
+        CurrentInteractionMode = controllers ? InteractionMode.Controllers : InteractionMode.Hands;
+        Debug.Log($"[XRInteractorSetup] Interaction mode set to: {CurrentInteractionMode}");
+    }
+
     public void EnableRightNearFarInteractor(bool enable)
     {
-        if (rightHand != null) {
+        if (rightHand != null & RightNearFarInteractor != null)
+        {
             RightNearFarInteractor.gameObject.SetActive(enable);
         }
     }
 
     public void EnableLeftNearFarInteractor(bool enable)
     {
-        if (leftHand != null) {
+        if (leftHand != null & LeftNearFarInteractor != null)
+        {
             LeftNearFarInteractor.gameObject.SetActive(enable);
         }
     }
@@ -131,8 +142,11 @@ public class XRInteractorSetup : MonoBehaviour
             {
                 if (nearFar != null)
                 {
-                    rightRayLineVisual.gameObject.SetActive(EnableRightRayLineVisual);
-                    leftRayLineVisual.gameObject.SetActive(EnableLeftRayLineVisual);
+                    if (rightRayLineVisual != null & leftRayLineVisual != null)
+                    {
+                        rightRayLineVisual.gameObject.SetActive(EnableRightRayLineVisual);
+                        leftRayLineVisual.gameObject.SetActive(EnableLeftRayLineVisual);
+                    }
                     // Debug.Log("[XRInteractorSetup] Disabled Near-Far Interactor for ObjectCollection task.");
                 }
                 else

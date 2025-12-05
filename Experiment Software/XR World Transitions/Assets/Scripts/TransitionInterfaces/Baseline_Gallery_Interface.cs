@@ -49,7 +49,8 @@ public class Baseline_Gallery_Interface : TransitionInterface
         if (enable) {
 
             PositionGalleryInterfaceObject();
-            studyManager.Instance.GetComponent<XRInteractorSetup>().EnableBaselineInteractor(true);
+            TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.EnableBaselineInteractor(true);
+            // studyManager.Instance.GetComponent<XRInteractorSetup>().EnableBaselineInteractor(true);
 
             // if (studyManager.Instance.GetComponent<XRInteractorSetup>().rightHand != null) {
             //     studyManager.Instance.GetComponent<XRInteractorSetup>().RightNearFarInteractor.keepSelectedTargetValid = false;
@@ -57,8 +58,8 @@ public class Baseline_Gallery_Interface : TransitionInterface
 
         } else {
 
-
-            studyManager.Instance.GetComponent<XRInteractorSetup>().EnableBaselineInteractor(false);
+            TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.EnableBaselineInteractor(false);
+            // studyManager.Instance.GetComponent<XRInteractorSetup>().EnableBaselineInteractor(false);
             
             // studyManager.Instance.GetComponent<XRInteractorSetup>().EnableRightNearFarInteractor(false);
             // studyManager.Instance.GetComponent<XRInteractorSetup>().EnableRightRayLineVisual = false;

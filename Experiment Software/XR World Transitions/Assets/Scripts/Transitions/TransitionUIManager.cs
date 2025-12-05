@@ -54,7 +54,7 @@ public class TransitionUIManager : MonoBehaviour
     [SerializeField] private GameObject transitionUI;
     [SerializeField] private GetSwipeTranslation swipeTranslator;
     [SerializeField] private TransitionUIType worldTransitionUIType;
-    public TransitionUIType WorldTransitionUIType { get => worldTransitionUIType; }
+    public TransitionUIType WorldTransitionUIType { get => worldTransitionUIType; set => worldTransitionUIType = value; }
 
     [SerializeField] private float galleryCurveLayoutScrollStart;
     public float GalleryCurveLayoutScrollStart { get => galleryCurveLayoutScrollStart; }
@@ -65,7 +65,23 @@ public class TransitionUIManager : MonoBehaviour
 
     public TransitionCursorController TransitionCursorController;
     public GameObject WheelCursor;
-    public WorldTargetMenuItem HoveredMenuItem;
+    [SerializeField] private WorldTargetMenuItem hoveredMenuItem;
+    public WorldTargetMenuItem HoveredMenuItem
+    {
+        get => hoveredMenuItem;
+        set
+        {
+            hoveredMenuItem = value;
+            if (value != null)
+            {
+                LastHoveredMenuItem = value;
+                LastHoverTime = Time.time;
+            }
+        }
+    }
+
+    public WorldTargetMenuItem LastHoveredMenuItem;
+    public float LastHoverTime;
 
     public GameObject WIMObjects;
 
@@ -108,8 +124,19 @@ public class TransitionUIManager : MonoBehaviour
 
     public void HandleWorldTransitionUITypeChanged()
     {
+        // TODO: turn off current interface
+        CurrentTransitionInterface?.InterfaceObject.SetActive(false);
+
         // Add your logic here to handle the change in worldTransitionUIType
         Debug.Log("worldTransitionUIType has been changed to: " + worldTransitionUIType);
+        if (worldTransitionUIType != TransitionUIType.Portal_Palette_Hand && worldTransitionUIType != TransitionUIType.Portal_Palette_HeadHand && worldTransitionUIType != TransitionUIType.WIM_Palette_Hand && worldTransitionUIType != TransitionUIType.WIM_Palette_HeadHand)
+        {
+            TransitionCursorController.gameObject.SetActive(false);
+        }
+        else
+        {
+            TransitionCursorController.gameObject.SetActive(true);
+        }
         switch (worldTransitionUIType)
         {
             case TransitionUIType.None:
@@ -159,6 +186,10 @@ public class TransitionUIManager : MonoBehaviour
         ActivateSelectedInterface();
         UpdateTutorialVideo();
         InteractionManager.ActivateSelectedInteractionHandler();
+        if (studyManager.Instance.studyUIManager != null)
+        {
+            studyManager.Instance.studyUIManager.SetUpTechniqueTrainingUI(worldTransitionUIType);
+        }
     }
 
     public void UpdateTutorialVideo()

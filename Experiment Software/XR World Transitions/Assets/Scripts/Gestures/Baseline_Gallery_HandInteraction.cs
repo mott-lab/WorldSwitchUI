@@ -13,14 +13,15 @@ public class Baseline_Gallery_HandInteraction : InteractionHandler
         
     }
 
+    void OnEnable()
+    {
+        DominantHandActivation = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
         // ProcessUpdate();
-    }
-
-    public override void InitInteractionHandler() {
-        // interfaceRef = TransitionUIManager.Instance.CurrentTransitionInterface;        
     }
 
     public override void HandleActivation()
@@ -36,42 +37,6 @@ public class Baseline_Gallery_HandInteraction : InteractionHandler
     public override void HandleSelection()
     {
         // Implementation for handling selection
-    }
-
-    bool pinchDetected;
-    /// <summary>
-    /// Check for gestures and handle them accordingly. Will not be reached if a gesture is already in progress.
-    /// </summary>
-    public override void CheckForGestures()
-    {
-        // handle gesture progress tracking
-        if (GestureInProgress) return;
-
-        if (StudyConfigurationManager.Instance.UserDominantHand == StudyConfigurationManager.DominantHand.RightHand) {
-            pinchDetected = GestureDetected("R_MiddleThumb_Pinch").Item1;
-        } else {
-            pinchDetected = GestureDetected("L_MiddleThumb_Pinch").Item1;
-        }
-
-        // middle pinch detected
-        if (pinchDetected)
-        {
-
-            if (CurrentState == GestureState.MenuClose) {
-                TransitionToState(GestureState.MenuOpen);
-            } 
-        }
-        // middle pinch NOT detected
-        else {
-            // if menu is open, we detect end of gesture
-            if (CurrentState == GestureState.MenuOpen) {
-
-                if (TransitionUIManager.Instance.HoveredMenuItem != null) {
-                    TransitionUIManager.Instance.HoveredMenuItem.ConfirmWorldTargetMenuItem();
-                }
-                TransitionToState(GestureState.MenuClose); 
-            }
-        }
     }
 
 

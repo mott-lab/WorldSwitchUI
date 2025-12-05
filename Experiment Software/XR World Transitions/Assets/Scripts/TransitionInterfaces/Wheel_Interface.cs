@@ -19,13 +19,36 @@ public class Wheel_Interface : TransitionInterface
     }
 
     private void positionInterface() {
-        if (XRComponents.Instance.wristL == null || XRComponents.Instance.wristR == null) return;
 
-        Vector3 midPointBetweenHands = (XRComponents.Instance.wristL.transform.position + XRComponents.Instance.wristR.transform.position) / 2;
+        Vector3 midPointBetweenHands = Vector3.zero;
+        Transform leftHandTransform = null;
+        Transform rightHandTransform = null;
+        if (TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode == XRInteractorSetup.InteractionMode.Hands)
+        {
+            if (XRComponents.Instance.wristL == null || XRComponents.Instance.wristR == null) return;
+            leftHandTransform = XRComponents.Instance.wristL.transform;
+            rightHandTransform = XRComponents.Instance.wristR.transform;
+            midPointBetweenHands = (leftHandTransform.position + rightHandTransform.position) / 2;
+        }
+        else
+        {
+            // if (XRComponents.Instance.LeftController == null || XRComponents.Instance.RightController == null) return;
+            if (XRComponents.Instance.LeftController == null || XRComponents.Instance.RightController == null) return;
+            leftHandTransform = XRComponents.Instance.LeftController.transform;
+            rightHandTransform = XRComponents.Instance.RightController.transform;
+            midPointBetweenHands = (leftHandTransform.position + rightHandTransform.position) / 2;
+        }
 
+        float forwardMultiplier = 0.15f;
+        float upMultiplier = 0.15f;
+        if (TransitionUIManager.Instance.InteractionManager.XRInteractorSetup.CurrentInteractionMode == XRInteractorSetup.InteractionMode.Controllers)
+        {
+            forwardMultiplier = 0f;
+            upMultiplier = 0f;
+        }
         Vector3 targetPosition = midPointBetweenHands + 
-                (Vector3.up * 0.15f) + 
-                (XRComponents.Instance.XRCamera.transform.forward * 0.15f);
+                (Vector3.up * upMultiplier) + 
+                (XRComponents.Instance.XRCamera.transform.forward * forwardMultiplier);
 
         // Move the whole interface toward the target position smoothly
         float distance = Vector3.Distance(InterfaceObject.transform.position, targetPosition);
@@ -35,9 +58,9 @@ public class Wheel_Interface : TransitionInterface
         }
 
         // convert wristR position to local space from camera
-        Vector3 wristRLocal = XRComponents.Instance.HeadForwardDirection.transform.InverseTransformPoint(XRComponents.Instance.wristR.transform.position);
+        Vector3 wristRLocal = XRComponents.Instance.HeadForwardDirection.transform.InverseTransformPoint(rightHandTransform.position);
 
-        Vector3 wristLLocal = XRComponents.Instance.HeadForwardDirection.transform.InverseTransformPoint(XRComponents.Instance.wristL.transform.position);
+        Vector3 wristLLocal = XRComponents.Instance.HeadForwardDirection.transform.InverseTransformPoint(leftHandTransform.position);
 
         // Rotate the interface to align with user's view
         InterfaceObject.transform.rotation = XRComponents.Instance.XRCamera.transform.rotation;
@@ -65,7 +88,7 @@ public class Wheel_Interface : TransitionInterface
         WheelObjectsToRotate.transform.localEulerAngles = new Vector3(prevAngles.x, prevAngles.y, angle);
 
         // get distance between hands
-        float distanceBetweenHands = Vector3.Distance(XRComponents.Instance.wristL.transform.position, XRComponents.Instance.wristR.transform.position);
+        float distanceBetweenHands = Vector3.Distance(leftHandTransform.position, rightHandTransform.position);
         // scale the interface based on the distance between hands
         InterfaceObject.transform.localScale = distanceMultiplier * new Vector3(distanceBetweenHands, distanceBetweenHands, distanceBetweenHands);
 

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using Flexalon;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.XR.Hands;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public abstract class TransitionInterface : MonoBehaviour

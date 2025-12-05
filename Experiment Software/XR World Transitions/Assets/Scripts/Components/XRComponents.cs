@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.XR.Hands;
 
@@ -46,8 +47,8 @@ public class XRComponents : MonoBehaviour
     public GameObject XRRig => xrRig;
     [SerializeField] private Camera xrCamera;
     public Camera XRCamera => xrCamera;
-    public GameObject LeftController => leftController;
     [SerializeField] private GameObject leftController;
+    public GameObject LeftController => leftController;
     [SerializeField] private GameObject rightController;
     public GameObject RightController => rightController;
     [SerializeField] private GameObject headGazeSphere;
@@ -83,5 +84,12 @@ public class XRComponents : MonoBehaviour
     public TextMeshProUGUI TechniqueTitle;
     public TextMeshProUGUI TechniqueDescription;
     public VideoPlayer TutotialVideoPlayer;
+
+    [Header("Demo Components")]
+    public GameObject DemoUIParent;
+    public TMPro.TMP_Dropdown PreviewSelectorDropdown;
+    public GameObject PreviewSelectionReminder;
+    public TMPro.TMP_Dropdown InteractionSelectorDropdown;
+    public GameObject InteractionSelectionReminder;
 
 }
