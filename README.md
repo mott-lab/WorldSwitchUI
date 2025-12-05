@@ -4,6 +4,12 @@ Unity files are in the `Experiment Software` folder.
 
 Experiment data and analysis scripts are in the `Data and Analysis` folder.
 
+## Updates to the repo during R&R cycle
+
+We added support for trying our techniques with controllers. The interaction process is consistent with controllers, the activation gesture (middle-finger--thumb pinch) is simply matched to the `primary button` on the controller. E.g., if the interaction technique calls for holding a left (or right) middle--thumb pinch, the user can hold down the left controller's `X button` (or the right controller's `A button`).
+
+We also made a demo scene `WorldSwitch_Demo` which includes a UI for the user to switch between the different techniques. Rather than running through the experiment procedure (and manually changing the active interface in the Unity Editor) the user can push the buttons on the world-switching interface selection UI. We recommend users do this unless they want to experience the entire experiment.
+
 ## Dependencies
 
 This project has several dependencies that should be placed in a folder called `ThirdPartyAssets`. Unfortunately, the first two in this list are paid assets. The Polygon Sampler Pack is available for free with the [Unity Student Plan](https://unity.com/products/unity-student). I do not see any way out of purchasing the Flexalon Pro asset. However, I find it quite useful for developing 3DUI quickly, so 3DUI researchers may be interested in having this asset as well.
@@ -25,7 +31,8 @@ This project also uses some assets that are available from the Unity registry.
 
 ## Running the Project
 Connect your Meta Quest headset to your computer using a Meta Link cable and start Oculus Link.
-Open the `XRWorldSwitcher_IntegratedStudy` scene --- it is the experiment scene.
+If you want to run through the entire experiment, open the `XRWorldSwitcher_IntegratedStudy` scene --- it is the experiment scene.
+If you just want to try out the interface, open the `WorldSwitch_Demo` scene.
 Press Play.
 
 All interfaces are activated by a middle-finger--thumb pinch.
@@ -49,7 +56,11 @@ The experiment involves collecting 15 coins, each one spawning in a random envir
 After you deposit the 15th coin in the chest, the instructions for the next interface will appear in the Home environment.
 
 ### Trying different interfaces
-If you do not want to complete all the trials for every interface, you can switch between different interfaces whenever you want through the `Transition UI Manager` gameobject.
+If you do not want to complete all the trials for every interface, we recommend using the `WorldSwitch_Demo` scene.
+In the Home environment for this scene, there is a push-button UI for selecting different world-switching interfaces.
+In this version, the experiment task will continue to run and not break for different trial blocks.
+
+If you are using the `XRWorldSwitcher_IntegratedStudy` scene, you can switch between different interfaces whenever you want through the `Transition UI Manager` gameobject.
 In the Inspector, click the dropdown for `World Transition UI Type`.
 Select an interface and begin using it to transition to different environments.
 
