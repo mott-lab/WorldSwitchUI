@@ -12,6 +12,7 @@ public class PaletteMenuObject : MonoBehaviour
         // create a new instance of the material to avoid affecting other objects
         instanceMaterial = new Material(outlineMaterial);
         backgroundObject.GetComponent<Renderer>().material = instanceMaterial;
+        backgroundObject.GetComponent<Renderer>().material.shader = outlineMaterial.shader;
     }
 
     private void OnTriggerEnter(Collider other)
