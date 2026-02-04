@@ -85,6 +85,7 @@ public class DataLogger : MonoBehaviour
     private void Update()
     {
         if (trackingWriter == null) return;
+        if (StudyConfigurationManager.Instance.CurrentOperationMode == StudyConfigurationManager.OperationMode.Demo) return;
         // if (StudyConfigurationManager.Instance.CurrentOperationMode == StudyConfigurationManager.OperationMode.Demo) return;
 
         // GameObject hmdObject = GameObject.Find("Main Camera");
