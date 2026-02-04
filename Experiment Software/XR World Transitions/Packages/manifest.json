@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.de-panther.webxr": "https://github.com/De-Panther/unity-webxr-export.git?path=/Packages/webxr",
+    "com.de-panther.webxr-interactions": "https://github.com/De-Panther/unity-webxr-export.git?path=/Packages/webxr-interactions",
     "com.unity.ai.navigation": "2.0.4",
     "com.unity.collab-proxy": "2.5.2",
     "com.unity.ide.rider": "3.0.31",
