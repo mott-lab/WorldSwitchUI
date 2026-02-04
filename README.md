@@ -4,7 +4,9 @@ Unity files are in the `Experiment Software` folder.
 
 Experiment data and analysis scripts are in the `Data and Analysis` folder.
 
-## Updates to the repo during R&R cycle
+
+
+## Support for controllers
 
 We added support for trying our techniques with controllers. The interaction process is consistent with controllers, the activation gesture (middle-finger--thumb pinch) is simply matched to the `primary button` on the controller. E.g., if the interaction technique calls for holding a left (or right) middle--thumb pinch, the user can hold down the left controller's `X button` (or the right controller's `A button`).
 

@@ -9,6 +9,7 @@ public class WIM_Gallery_Interface : TransitionInterface
     [Header("WIM Interface Objects")]
     public Transform WIMTransform;
     // public float GalleryCurveLayoutScrollStart;
+    
 
     void Awake()
     {
@@ -30,6 +31,8 @@ public class WIM_Gallery_Interface : TransitionInterface
             TransitionUIManager.Instance.WIMObjects.transform.parent = WIMTransform;
         }
         TransitionUIManager.Instance.WIMObjects.SetActive(enable);
+        TransitionUIManager.Instance.WIMObjects.transform.localScale = new Vector3(1.0582f, 1.0582f, 1.0582f);
+        TransitionUIManager.Instance.WIMObjectClipperController.sphereRadius = 0.104f;
     }
 
     private IEnumerator ScaleOverTime(FlexalonObject flexalonObject, Vector3 targetScale, float duration)

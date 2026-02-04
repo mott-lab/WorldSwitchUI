@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Hands;
 
@@ -114,7 +115,10 @@ public class PaletteWIM_Interface : TransitionInterface
         else {
             TransitionUIManager.Instance.TransitionCursorController.GetComponent<MeshRenderer>().enabled = false;
         }
+        // Reset WIM-specific objects
         TransitionUIManager.Instance.WIMObjects.SetActive(enable);
+        TransitionUIManager.Instance.WIMObjects.transform.localScale = new Vector3(1.0582f, 1.0582f, 1.0582f);
+        TransitionUIManager.Instance.WIMObjectClipperController.sphereRadius = 0.104f;
     }
 
     public override void CheckSelectedMenuItem()
