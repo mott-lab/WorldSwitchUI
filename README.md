@@ -6,6 +6,10 @@ This repository contains the experiment software, data, and data analysis script
 
 [[Video figure demonstrating interfaces]](https://www.youtube.com/watch?v=VOiOCIRqqNA)
 
+If you have any issues getting any of this up and running, or have ideas for further development / collaboration building on this work, I would love to hear from you! You can email me at mattg@ucf.edu.
+
+Note (2026-02-05): I am planning to refactor and make the code a bit more modular and understandable out of the box. If you want to use this before I get around to this and have trouble with anything, feel free to reach out and I am happy to walk you through the setup.
+
 ## Table of Contents
 
 - [Software](#software)
