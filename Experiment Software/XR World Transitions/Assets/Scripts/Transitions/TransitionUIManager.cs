@@ -85,6 +85,8 @@ public class TransitionUIManager : MonoBehaviour
 
     public GameObject WIMObjects;
 
+    public ObjectClipperController WIMObjectClipperController;
+
     public CoinAnchorController CoinAnchorController;
 
     private void Reset()

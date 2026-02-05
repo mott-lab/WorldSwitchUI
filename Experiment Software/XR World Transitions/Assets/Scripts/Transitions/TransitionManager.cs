@@ -177,7 +177,9 @@ public class TransitionManager : MonoBehaviour
         }
 
         // disable transition interface when user arrives in env where the coin is. this is re-enabled when coin is collected.
-        if (worldTarget == studyManager.Instance.CurrentItem.worldTarget && 
+        // NOTE: makes experiment task easier to complete without accidental env switches. Disable for demo.
+        if (StudyConfigurationManager.Instance.CurrentOperationMode == StudyConfigurationManager.OperationMode.Study &&
+                worldTarget == studyManager.Instance.CurrentItem.worldTarget && 
                 !studyManager.Instance.CurrentItem.item.GetComponent<CollectableItem>().HasLoggedGrab &&
                 studyManager.Instance.GetComponent<StudyConfigurationManager>().TechniqueTrainingComplete) {
             Debug.Log("In the environment with the coin. Disabling transition interface.");
